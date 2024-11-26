@@ -1,8 +1,12 @@
 import requests
+import os
 
 USER_AGENT = "https://github.com/robertbrod/aoc by robbrod93@gmail.com"
 
 def fetch_input(year, day):
+    if os.path.exists(f"{year}/{day}/{year}_{day}_input.txt"):
+        raise Exception(f"Cancelling AoC endpoint request; input data already cached.")
+
     url = f"https://adventofcode.com/{year}/day/{day}/input"
     headers = {
         "User-Agent": USER_AGENT,
@@ -12,7 +16,7 @@ def fetch_input(year, day):
     response = requests.get(url, headers=headers)
 
     if response.status_code == 200:
-        data_array = response.text.split("\n")
-        return data_array
+        data = response.text
+        return data
     else:
         raise Exception(f"AoC endpoint request failed. Status code: {response.status_code}")
