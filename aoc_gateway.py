@@ -4,8 +4,8 @@ import state_manager
 from datetime import datetime
 
 USER_AGENT = state_manager.get_state("user_data")["user_agent"]
-COOKIE = state_manager.get_state("user_data")["cookie"]
 THROTTLE = state_manager.get_state("outbound_api_call_throttle")
+COOKIE = os.getenv("AOC_COOKIE")
 
 def fetch_input(year, day):
     if minutes_since_last_outbound_call() < int(THROTTLE):
