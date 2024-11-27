@@ -1,5 +1,5 @@
 import aoc_gateway
-import yearly_helper
+import util
 from datetime import datetime
 import os
 
@@ -12,7 +12,7 @@ PART = 1
 # ---------- Yearly helpers ----------
 
 if not os.path.exists(f"{datetime.now().year}/"):
-    yearly_helper.create_input_dirs(YEAR)
+    util.create_input_dirs(YEAR)
 else:
     print("Skipping yearly helper for creating directories; it should already exist!")
 
@@ -27,6 +27,3 @@ try:
         file.write(data)
 except Exception as error:
     print(error)
-
-puzzle_input = 
-
