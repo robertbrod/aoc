@@ -1,4 +1,5 @@
 # Advent of Code 2023 - Day 15
+
 def solve_part_one(input):
     return 0
 

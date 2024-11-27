@@ -1,6 +1,7 @@
 import os
 
 scaffolding = """# Advent of Code {year} - Day {day}
+
 def solve_part_one(input):
     return 0
 
