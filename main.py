@@ -39,4 +39,5 @@ input_data = input_data_str.splitlines()
 part_one_result = solution_module.solve_part_one(input_data)
 # part_two_result = solution_module.solve_part_two(input_data)
 
-print(part_one_result)
+response = aoc_gateway.submit_answer(YEAR, DAY, 1, part_one_result)
+print(response)
