@@ -20,6 +20,10 @@ def create_input_dirs(year):
         except Exception as error:
             print(f"Skipping directory creation: {path}")
             
-def cache_input_data(data, year, day):
+def cache_input(data, year, day):
     with open(f"{year}/{day}/{year}_{day}_input.txt", "w") as file:
         file.write(data)
+        
+def fetch_input(year, day):
+    with open(f"{year}/{day}/{year}_{day}_input.txt", "r") as file:
+        return file.read()
