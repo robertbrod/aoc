@@ -5,7 +5,7 @@ import os
 
 # ---------- CONSTANTS ----------
 
-YEAR = 2023
+YEAR = 2024
 DAY = 1
 PART = 1
 
@@ -36,8 +36,14 @@ except ModuleNotFoundError:
 
 input_data_str = util.fetch_input(YEAR, DAY)
 input_data = input_data_str.splitlines()
-part_one_result = solution_module.solve_part_one(input_data)
+
+# part_one_result = solution_module.solve_part_one(input_data)
 # part_two_result = solution_module.solve_part_two(input_data)
 
-response = aoc_gateway.submit_answer(YEAR, DAY, 1, part_one_result)
-print(response)
+# print(part_two_result)
+
+# response = aoc_gateway.submit_answer(YEAR, DAY, 1, part_one_result)
+# print(response)
+
+# response = aoc_gateway.submit_answer(YEAR, DAY, 2, part_two_result)
+# print(response)

@@ -66,5 +66,7 @@ def parse_answer_response(response):
     
     if "Did you already complete it?" in result:
         result = "Puzzle already completed!"
+    elif "That's the right answer!" in result:
+        result = "Correct answer!"
         
     return result
