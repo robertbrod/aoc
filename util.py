@@ -10,6 +10,8 @@ def solve_part_two(input):
 """
 
 def create_input_dirs(year):
+    print(f"Creating directories for AoC {year}!")
+    
     for i in range(1, 26, 1):
         try:
             path = f"{year}/{i}"

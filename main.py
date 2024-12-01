@@ -2,48 +2,57 @@ import aoc_gateway
 import importlib
 import util
 import os
+import config_manager
 
-# ---------- CONSTANTS ----------
-
-YEAR = 2024
-DAY = 1
-PART = 1
-
-# ---------- Yearly helpers ----------
-
-if not os.path.exists(f"{YEAR}/"):
-    util.create_input_dirs(YEAR)
-else:
-    print("Skipping yearly helper for creating directories; it should already exist!")
-
-# ---------- Puzzle ----------
-
-response = None
-
-try:
-    # Fetch input data from Advent of Code website and cache on disk
-    response = aoc_gateway.fetch_input(YEAR, DAY)
-    util.cache_input(response, YEAR, DAY)
-except Exception as error:
-    print(error)
+def create_dirs():
+    year = config_manager.get_state("year")
     
-try:
+    # If this year's directory exists, we likely ran this successfully already.
+    if not os.path.exists(f"{year}/"):
+        util.create_input_dirs(year)
+
+def fetch_input():
+    year = config_manager.get_state("year")
+    day = config_manager.get_state("day")
+    
+    try:
+        response = aoc_gateway.fetch_input(year, day)
+        util.cache_input(response, year, day)
+    except Exception as error:
+        print(error)
+
+def run_solution():
+    year = config_manager.get_state("year")
+    day = config_manager.get_state("day")
+    part = config_manager.get_state("part")
+    
     # Dynamically fetch the appropriate solution module
-    module_name = f"{YEAR}.{DAY}.solution"
-    solution_module = importlib.import_module(module_name)
-except ModuleNotFoundError:
-    print(f"Solution for {YEAR} day {DAY} not found")
+    try:
+        module_name = f"{year}.{day}.solution"
+        solution_module = importlib.import_module(module_name)
+    except ModuleNotFoundError:
+        print(f"Solution for {year} day {day} not found")
+    
+    input_data = util.fetch_input(year, day).splitlines()
+    
+    if part == 1:
+        result = solution_module.solve_part_one(input_data)
+        response = aoc_gateway.submit_answer(year, day, part, result)
+        print(response)
+    elif part == 2:
+        result = solution_module.solve_part_two(input_data)
+        response = aoc_gateway.submit_answer(year, day, part, result)
+        print(response)
 
-input_data_str = util.fetch_input(YEAR, DAY)
-input_data = input_data_str.splitlines()
+def main():
+    # Create scaffolded directories and solution files
+    create_dirs()
+    
+    # Fetch input data from Advent of Code website and cache data on disk
+    fetch_input()
+    
+    # Run solution!
+    run_solution()
 
-# part_one_result = solution_module.solve_part_one(input_data)
-# part_two_result = solution_module.solve_part_two(input_data)
-
-# print(part_two_result)
-
-# response = aoc_gateway.submit_answer(YEAR, DAY, 1, part_one_result)
-# print(response)
-
-# response = aoc_gateway.submit_answer(YEAR, DAY, 2, part_two_result)
-# print(response)
+if __name__ == "__main__":
+    main()

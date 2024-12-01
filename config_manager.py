@@ -2,7 +2,7 @@ import json
 from pathlib import Path
 from datetime import datetime
 
-STATE_FILE = Path("aoc_state.json")
+STATE_FILE = Path("config.json")
 
 def load_state():
     if STATE_FILE.exists():
