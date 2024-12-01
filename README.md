@@ -4,12 +4,12 @@
 
 # Prerequisites 🐍
 
-Python 3.12.0+
+- Python 3.12.0+
+- `pip` for managing dependencies
 
-## Required libraries:
+## Installing Dependencies:
 
-- bs4
-- requests
+Run `pip install -r requirements.txt` inside repo dir
 
 # How to Use 👀
 
