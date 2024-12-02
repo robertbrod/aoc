@@ -11,7 +11,7 @@ def fetch_input(year, day):
     if os.path.exists(f"{year}/{day}/{year}_{day}_input.txt"):
         raise Exception(f"Input data for day {day} ({year}) already cached.")
     
-    if minutes_since_last_outbound_call() < int(config_manager.get_state("outbound_api_call_throttle")):
+    if minutes_since_last_outbound_call() < int(config_manager.get_config("outbound_api_call_throttle")):
         raise Exception(f"Cancelling AoC endpoint request; the last request was too recent.")
     
     url = f"https://adventofcode.com/{year}/day/{day}/input"
@@ -46,7 +46,7 @@ def submit_answer(year, day, part, answer):
 def fetch_leaderboard():
     print(f"Fetching private leaderboard stats...")
     
-    response = requests.get(config_manager.get_state("private_leaderboard_url"), headers = fetch_headers())
+    response = requests.get(config_manager.get_config("private_leaderboard_url"), headers = fetch_headers())
     
     if response.status_code == 200:
         participants = []
@@ -100,7 +100,7 @@ def fetch_leaderboard():
         raise Exception(f"AoC endpoint request failed. Status code: {response.status_code}") 
     
 def minutes_since_last_outbound_call():
-    last_call_str = config_manager.get_state("last_outbound_api_call_time")
+    last_call_str = config_manager.get_config("last_outbound_api_call_time")
     last_call = datetime.fromisoformat(last_call_str)
     current_time = datetime.now()
     time_difference = current_time - last_call
@@ -108,7 +108,7 @@ def minutes_since_last_outbound_call():
 
 def fetch_headers():
     return {
-        "User-Agent": config_manager.get_state("user_data")["user_agent"],
+        "User-Agent": config_manager.get_config("user_data")["user_agent"],
         "Cookie": os.getenv("AOC_COOKIE")
     }
     
