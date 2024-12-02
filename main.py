@@ -3,6 +3,7 @@ import importlib
 import util
 import os
 import config_manager
+import time
 
 def create_dirs():
     year = config_manager.get_config("year")
@@ -36,11 +37,22 @@ def run_solution():
     input_data = util.fetch_input(year, day).splitlines()
     
     if part == 1:
+        start_time = time.perf_counter()
         result = solution_module.solve_part_one(input_data)
+        end_time = time.perf_counter()
+        
+        execution_time = end_time - start_time
+        print(f"Solution execution time: {execution_time * 1000:.3f} ms")
+        
         response = aoc_gateway.submit_answer(year, day, part, result)
         print(response)
     elif part == 2:
+        start_time = time.perf_counter()
         result = solution_module.solve_part_two(input_data)
+        end_time = time.perf_counter()
+        execution_time = end_time - start_time
+        print(f"Solution execution time: {execution_time * 1000:.3f} ms")
+        
         response = aoc_gateway.submit_answer(year, day, part, result)
         print(response)
         
