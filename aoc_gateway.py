@@ -46,9 +46,7 @@ def submit_answer(year, day, part, answer):
 def fetch_leaderboard():
     print(f"Fetching private leaderboard stats...")
     
-    url = "https://adventofcode.com/2024/leaderboard/private/view/1331446"
-    
-    response = requests.get(url, headers = fetch_headers())
+    response = requests.get(config_manager.get_state("private_leaderboard_url"), headers = fetch_headers())
     
     if response.status_code == 200:
         participants = []
