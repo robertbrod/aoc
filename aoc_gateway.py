@@ -68,7 +68,7 @@ def fetch_leaderboard():
             
             # Parse the participant's number of stars
             two_star_divs = row.find(class_ = 'privboard-star-both')
-            one_star_divs = row.find(class_ = 'privboard-star')
+            one_star_divs = row.find(class_ = 'privboard-star-firstonly')
             
             total_stars = 0
             
@@ -84,7 +84,7 @@ def fetch_leaderboard():
             position = None
   
             position_div = row.find(class_ = 'privboard-position')
-            if position_div:
+            if position_div and participant.stars > 0:
                 position_text = position_div.get_text()
                 position_text = position_text.replace(')', '')
                 
