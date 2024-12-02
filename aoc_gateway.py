@@ -123,5 +123,9 @@ def parse_answer_response(response):
         result = "Puzzle already completed!"
     elif "That's the right answer!" in result:
         result = "Correct answer!"
+    elif "That's not the right answer." in result:
+        result = "Wrong answer!"
+    elif "your answer is too high" in result:
+        result = "Submitted answer is ABOVE the expected answer..."
         
     return result
