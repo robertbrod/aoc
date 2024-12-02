@@ -43,8 +43,18 @@ def run_solution():
         result = solution_module.solve_part_two(input_data)
         response = aoc_gateway.submit_answer(year, day, part, result)
         print(response)
+        
+def display_leaderboard():
+    participants = aoc_gateway.fetch_leaderboard()
+    for participant in participants:
+        position_str = "N/A " if participant.position == None else str(participant.position) + ') '
+        print(f"{position_str:<5} {participant.name:<25} {str(participant.stars) + '★':<5}")
 
 def main():
+    display_leaderboard = config_manager.get_state("display_leaderboard")
+    if display_leaderboard:  
+        display_leaderboard()
+    
     # Create scaffolded directories and solution files
     create_dirs()
     
