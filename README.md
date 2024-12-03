@@ -48,3 +48,5 @@ This repo follows the automation guidelines on the r/adventofcode community [wik
 # Acknowledgments 🙏
 
 A huge thanks to [Eric Wastl](https://x.com/ericwastl) for creating and hosting [Advent of Code](https://adventofcode.com/) every year - it's a highlight of the holiday season for developers worldwide!
+
+A special thanks to [Austin Owensby](https://github.com/austin-owensby) for inspiring such a robust infrastructure and for participating in the event.
