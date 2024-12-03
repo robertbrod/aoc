@@ -126,6 +126,6 @@ def parse_answer_response(response):
     elif "That's not the right answer." in result:
         result = "Wrong answer!"
     elif "your answer is too high" in result:
-        result = "Submitted answer is ABOVE the expected answer..."
+        result = "Submitted answer is ABOVE the expected answer."
         
     return result
