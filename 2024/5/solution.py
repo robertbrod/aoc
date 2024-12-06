@@ -83,7 +83,11 @@ def solve_part_two(input):
         
         for page in pages:
             # all the values that must come AFTER it
-            rules = rule_map[page]
+            if page in rule_map:
+                rules = rule_map[page]
+            else:
+                rules = []
+                
             if set(prev_nums) & set(rules):
                 valid = False
                 invalid_updates.append(update)
@@ -91,28 +95,42 @@ def solve_part_two(input):
 
             prev_nums.append(page)
 
-        if valid:
-            total_sum += find_middle(pages)
-
     # Finally, lets sort out the invalid updates and make them VALID!
     for update in invalid_updates:
+        
         prev_nums = []
         pages = update.split(",")
         index = 0
 
         while index < len(pages):
             # all the values that must come AFTER it
-            rules = rule_map[pages[index]]
+            if pages[index] in rule_map:
+                rules = rule_map[pages[index]]
+            else:
+                rules = []
 
             # Okay, we have an intersection. Let's look a little deeper...
             if set(prev_nums) & set(rules):
                 for prev_nums_index, prev_num in enumerate(prev_nums):
                     if prev_num in rules:
-                        # swap the page we are looking at and the rule offender
-                        dirty_rotten_rule_breaker = 
-                        pass
-
-            index += 1
+                        dirty_rotten_rule_breaker = prev_nums[prev_nums_index]
+                        index_of_offender = pages.index(dirty_rotten_rule_breaker)
+                        current_num = pages[index]
+                        
+                        # Swap the offender and the current num
+                        prev_nums[prev_nums_index] = current_num
+                        pages[index] = dirty_rotten_rule_breaker
+                        
+                        # Put the original number back where the offender was
+                        pages[index_of_offender] = current_num
+                        
+                        # Reset index back to 0 because we are a brute force FREAK
+                        index = 0
+                        prev_nums = []
+                        break
+            else:
+                prev_nums.append(pages[index])
+                index += 1
 
         total_sum += find_middle(pages)
                    

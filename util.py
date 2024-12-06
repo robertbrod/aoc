@@ -29,3 +29,7 @@ def cache_input(data, year, day):
 def fetch_input(year, day):
     with open(f"{year}/{day}/{year}_{day}_input.txt", "r") as file:
         return file.read()
+    
+def fetch_sample_input(year, day):
+    with open(f"{year}/{day}/sample_input.txt", "r") as file:
+        return file.read()
