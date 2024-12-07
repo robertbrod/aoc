@@ -44,8 +44,8 @@ def run_solution():
         execution_time = end_time - start_time
         print(f"Solution execution time: {execution_time * 1000:.3f} ms")
         
-        # response = aoc_gateway.submit_answer(year, day, part, result)
-        # print(response)
+        response = aoc_gateway.submit_answer(year, day, part, result)
+        print(response)
     elif part == 2:
         start_time = time.perf_counter()
         result = solution_module.solve_part_two(input_data)
