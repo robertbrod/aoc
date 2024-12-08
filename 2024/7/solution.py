@@ -48,12 +48,8 @@ def backtrack_two(index, current_value, target, nums):
         return True
     
     # Concatenation
-    if (index + 1) < len(nums):
-        nums_copy = nums[:]
-        concatenate_nums(nums_copy, index)
-
-        if backtrack_two(index, current_value, target, nums_copy):
-            return True
+    if backtrack_two(index + 1, int(str(current_value) + str(num)), target, nums):
+        return True
 
     return False
 
@@ -78,5 +74,5 @@ def solve_part_two(input):
         nums = data_set[1]
         if backtrack_two(1, nums[0], target, nums):
             total_calibration += target
-
+            
     return total_calibration

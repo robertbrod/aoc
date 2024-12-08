@@ -42,7 +42,7 @@ def run_solution():
         end_time = time.perf_counter()
         
         execution_time = end_time - start_time
-        print(f"Solution execution time: {execution_time * 1000:.3f} ms")
+        print(f"Solution execution time: {execution_time * 1000:.3f} ms. Computed answer: {result}")
         
         response = aoc_gateway.submit_answer(year, day, part, result)
         print(response)
@@ -51,7 +51,7 @@ def run_solution():
         result = solution_module.solve_part_two(input_data)
         end_time = time.perf_counter()
         execution_time = end_time - start_time
-        print(f"Solution execution time: {execution_time * 1000:.3f} ms")
+        print(f"Solution execution time: {execution_time * 1000:.3f} ms. Computed answer: {result}")
         
         response = aoc_gateway.submit_answer(year, day, part, result)
         print(response)
