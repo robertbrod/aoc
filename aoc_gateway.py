@@ -129,5 +129,9 @@ def parse_answer_response(response):
         result = "Submitted answer is ABOVE the expected answer."
     elif "your answer is too low" in result:
         result = "Submitted answer is BELOW the expected answer."
+    elif "You gave an answer too recently" in result:
+        sentences = result.split(".")
+        time_statement = sentences[1].split()
+        result = (f"You must wait {time_statement[2]} {time_statement[3]}...")
         
     return result
