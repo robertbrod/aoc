@@ -33,3 +33,22 @@ def fetch_input(year, day):
 def fetch_sample_input(year, day):
     with open(f"{year}/{day}/sample_input.txt", "r") as file:
         return file.read()
+    
+def in_bounds(x, y, width, height):
+    """
+    Check if a particular coord is within the bounds of a 2D structure
+
+    Args:
+        x (int): X coord
+        y (int): Y coord
+        width (int): width of 2D structure
+        height (int): height of 2D structure
+
+    Returns:
+        bool: The result of the check.
+
+    Raises:
+        None
+    """
+
+    return 0 <= x < width and 0 <= y < height

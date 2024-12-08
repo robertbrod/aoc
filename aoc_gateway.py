@@ -27,7 +27,7 @@ def fetch_input(year, day):
         raise Exception(f"AoC endpoint request failed. Status code: {response.status_code}")
     
 def submit_answer(year, day, part, answer):
-    print(f"Submiting answer ({answer}) for day {day} - part {part} puzzle ({year})...")
+    print(f"Submiting answer for day {day} - part {part} puzzle ({year})...")
     
     url = f"https://adventofcode.com/{year}/day/{day}/answer"
     payload = {
