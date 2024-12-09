@@ -24,7 +24,7 @@ def parse_disk_map(disk_map):
 
     return blocks
 
-def sort_blocks(blocks):
+def sort_blocks_contiguous(blocks):
     # Initialize free space pointer
     free_space_pointer = 0
     while blocks[free_space_pointer] != -1:
@@ -37,8 +37,6 @@ def sort_blocks(blocks):
         file_index_pointer += index_dx
 
     file_data = blocks[file_index_pointer]
-
-    dx_swapped = False
 
     # Main loop: continues as long as we are in bounds with both pointers
     while (0 <= file_index_pointer < len(blocks)) and free_space_pointer < len(blocks):
@@ -66,6 +64,74 @@ def sort_blocks(blocks):
             while (0 <= file_index_pointer <= len(blocks)) and file_data == -1:
                 file_index_pointer += index_dx
                 file_data = blocks[file_index_pointer]
+
+def print_blocks(blocks):
+    print_str = ""
+
+    for block in blocks:
+        if block == -1:
+            print_str = print_str + '.'
+        else:
+            print_str = print_str + str(block)
+
+    print(print_str)
+
+def sort_blocks_non_fragmenting(blocks):
+    # Initialize free space pointer
+    free_space_pointer = 0
+    while blocks[free_space_pointer] != -1:
+        free_space_pointer += 1
+
+    # Initialize block pointer
+    file_index_pointer = len(blocks) - 1
+    index_dx = -1
+    while blocks[file_index_pointer] == -1:
+        file_index_pointer += index_dx
+
+    orig_file_index_pointer = file_index_pointer
+
+    # Main loop: continues as long as we are in bounds with both pointers
+    while (0 <= file_index_pointer < len(blocks)) and free_space_pointer < len(blocks):
+        print_blocks(blocks)
+        # Compute the size of the available free space
+        free_space_size = 1
+        free_space_pointer_pair = free_space_pointer + 1
+        while free_space_pointer_pair < len(blocks) and blocks[free_space_pointer_pair] == -1:
+            free_space_size += 1
+            free_space_pointer_pair += 1   
+
+        # Now lets look for something that will fit
+        while True:
+            if blocks[file_index_pointer] == -1:
+                file_index_pointer -= 1
+                while blocks[file_index_pointer] == -1:
+                    file_index_pointer -= 1
+            file_size = 1
+            file_index_pointer_pair = file_index_pointer - 1
+            while blocks[file_index_pointer_pair] == blocks[file_index_pointer]:
+                file_size += 1
+                file_index_pointer_pair -= 1
+            
+            if file_size <= free_space_size or file_index_pointer < free_space_pointer:
+                break
+            else:
+                # If we moved into free space, we need to find another file block
+                file_index_pointer = file_index_pointer_pair
+                while blocks[file_index_pointer] == -1:
+                    file_index_pointer -= 1
+        
+        # Make the swap
+        if file_size <= free_space_size:
+            for i in range(file_size):
+                blocks[free_space_pointer + i] = blocks[file_index_pointer - i]
+                blocks[file_index_pointer - i] = -1
+
+        # Find the next free space
+        free_space_pointer = free_space_pointer + file_size
+        while free_space_pointer < len(blocks) and blocks[free_space_pointer] != -1:
+            free_space_pointer += 1
+
+        file_index_pointer = orig_file_index_pointer
         
 def compute_checksum(blocks):
     checksum = 0
@@ -80,8 +146,11 @@ def compute_checksum(blocks):
 def solve_part_one(input):
     disk_map = [int(digit) for digit in input[0]]
     blocks = parse_disk_map(disk_map)
-    sort_blocks(blocks)
+    sort_blocks_contiguous(blocks)
     return compute_checksum(blocks)
 
 def solve_part_two(input):
-    return 0
+    disk_map = [int(digit) for digit in input[0]]
+    blocks = parse_disk_map(disk_map)
+    sort_blocks_non_fragmenting(blocks)
+    return compute_checksum(blocks)
