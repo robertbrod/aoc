@@ -4,15 +4,32 @@ import config_manager
 from models import Participant
 from datetime import datetime
 from bs4 import BeautifulSoup
+from exceptions import DataAlreadyCached
+from exceptions import APIRequestThrottled
 
-def fetch_input(year, day):
+def fetch_input(year: str, day: str) -> str:
+    """
+    Writes puzzle input data to disk. Saves to `year/day/year_day_input.txt`
+
+    Args:
+        data (str): response from AoC API request
+        year (str): puzzle year
+        day (str): puzzle day
+
+    Returns:
+        Reponse from AoC API
+
+    Raises:
+        None
+    """
+    
     print(f"Fetching input data for day {day} ({year})...")
     
     if os.path.exists(f"{year}/{day}/{year}_{day}_input.txt"):
-        raise Exception(f"Input data for day {day} ({year}) already cached.")
+        raise DataAlreadyCached(f"Input data for day {day} ({year}) already cached.")
     
     if minutes_since_last_outbound_call() < int(config_manager.get_config("outbound_api_call_throttle")):
-        raise Exception(f"Cancelling AoC endpoint request; the last request was too recent.")
+        raise APIRequestThrottled(f"Cancelling AoC endpoint request; the last request was too recent.")
     
     url = f"https://adventofcode.com/{year}/day/{day}/input"
 

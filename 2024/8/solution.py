@@ -29,9 +29,9 @@ def solve_part_one(input):
                 dy = filtered_coord[1] - coord[1]
                 antinode_one = (filtered_coord[0] + dx, filtered_coord[1] + dy)
                 antinode_two = (coord[0] + (-1 * dx), coord[1] + (-1 * dy))
-                if util.in_bounds(antinode_one[0], antinode_one[1], width, height):
+                if util.in_bounds_2d(antinode_one[0], antinode_one[1], width, height):
                     antinodes.add(antinode_one)
-                if util.in_bounds(antinode_two[0], antinode_two[1], width, height):
+                if util.in_bounds_2d(antinode_two[0], antinode_two[1], width, height):
                     antinodes.add(antinode_two)
 
     return len(antinodes)
@@ -51,7 +51,7 @@ def solve_part_two(input):
                 dx = filtered_coord[0] - coord[0]
                 dy = filtered_coord[1] - coord[1]
                 antinode_x, antinode_y = filtered_coord[0] + dx, filtered_coord[1] + dy
-                while util.in_bounds(antinode_x, antinode_y, width, height):
+                while util.in_bounds_2d(antinode_x, antinode_y, width, height):
                     antinodes.add((antinode_x, antinode_y))
                     antinode_x, antinode_y = antinode_x + dx, antinode_y + dy
 

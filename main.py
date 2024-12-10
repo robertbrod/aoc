@@ -10,7 +10,7 @@ def create_dirs():
     
     # If this year's directory exists, we likely ran this successfully already.
     if not os.path.exists(f"{year}/"):
-        util.create_input_dirs(year)
+        util.create_daily_dirs(year)
 
 def fetch_input():
     year = config_manager.get_config("year")
