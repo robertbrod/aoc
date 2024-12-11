@@ -80,19 +80,19 @@
         "stars": 10
     },
     {
-        "name": "Joshua Chong",
+        "name": "Wade Moore",
         "position": 17,
-        "stars": 4
+        "stars": 7
     },
     {
-        "name": "elijahdecker",
+        "name": "Joshua Chong",
         "position": 18,
         "stars": 4
     },
     {
-        "name": "Wade Moore",
+        "name": "elijahdecker",
         "position": 19,
-        "stars": 6
+        "stars": 4
     },
     {
         "name": "akrislock-capsher",

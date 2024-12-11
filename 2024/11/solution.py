@@ -71,6 +71,46 @@ def solve_part_one(input):
     
     return linked_list.size
 
-def solve_part_two(input):
+def dfs(node, get_neighbors, depth, memoization_cache):
+    if depth == 0:
+        return 1
     
-    return None
+    if (node, depth) in memoization_cache:
+        return memoization_cache[(node, depth)]
+    
+    neighbors = get_neighbors(node)
+    total_count = 0
+    for neighbor in neighbors:
+        total_count += dfs(neighbor, get_neighbors, depth - 1, memoization_cache)
+        
+    memoization_cache[(node, depth)] = total_count
+    return total_count
+
+def get_neighbors(node):
+    neighbors = []
+    node_str = str(node)
+    
+    # Rule no. 1: If the the stone is engraved with the num 0, it is replace by a stone engraved with the num 1.
+    if node == 0:
+        neighbors.append(1)
+        
+    # Rule no. 2: If the stone is engraved with a num with an even number of digits, it is replaced by two stones.
+    # The left half of the digits on one stone, the right half of the digits on another. (Leading zeroes are not kept)
+    elif len(node_str) % 2 == 0:
+        neighbors.extend([int(node_str[:int(len(node_str) / 2)]), int(node_str[int(len(node_str) / 2):])])
+        
+    # Rule no. 3: If none of the other rules apply, the stone is replaced by a new stone with the old number multiplied by 2024
+    else:
+        neighbors.append(node * 2024)
+        
+    return neighbors
+
+def solve_part_two(input):    
+    total_stones = 0
+    stones = list(map(int, input[0].split()))
+    memoization_cache = {}
+    
+    for stone in stones:
+        total_stones += dfs(stone, get_neighbors, 75, memoization_cache)
+    
+    return total_stones
