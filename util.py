@@ -177,8 +177,8 @@ def in_bounds_2d(x: int, y: int, width: int, height: int) -> bool:
     Check if a particular coord is within the bounds of a 2D list
 
     Args:
-        x (int): X coord
-        y (int): Y coord
+        x (int): x coord
+        y (int): y coord
         width (int): width of 2D list
         height (int): height of 2D list
 
@@ -207,3 +207,78 @@ def in_bounds(index: int, length: int) -> bool:
     """
 
     return 0 <= index <= length
+
+def get_middle_object(data: list[any]) -> any:
+    """
+    Gets object in the middle of the list. Because this is done with integer division, if the length of the list has even parity this function will return the right side of the two middle objects
+
+    Args:
+        data (list[any]): list
+
+    Returns: 
+        any: object in the middle of the list
+
+    Raises:
+        None
+    """
+    
+    return data[int(len(data) / 2)]
+
+def fetch_neighbors_2d(data: list[list[any]], x: int, y: int) -> set[any]:
+    """
+    Get the neighbors of a coordinate in a 2D list.
+
+    Args:
+        data (list[list[any]]): 2D list
+        x (int): x coord
+        y (int): y coord
+
+    Returns:
+        set[any]: The unique neighbors of the given coordinate
+
+    Raises:
+        None
+    """
+    
+    neighbors = set()
+    width = len(data[0])
+    height = len(data)
+
+    # Up
+    dx, dy = 0, -1
+    if in_bounds_2d(x + dx, y + dy, width, height):
+        neighbors.add((x + dx, y + dy))
+
+    # Down
+    dx, dy = 0, 1 
+    if in_bounds_2d(x + dx, y + dy, width, height):
+        neighbors.add((x + dx, y + dy))
+
+    # Left
+    dx, dy = -1, 0
+    if in_bounds_2d(x + dx, y + dy, width, height):
+        neighbors.add((x + dx, y + dy))
+
+    # Right
+    dx, dy = 1, 0
+    if in_bounds_2d(x + dx, y + dy, width, height):
+        neighbors.add((x + dx, y + dy))
+
+    return neighbors
+
+def fetch_neighbors_2d(data: list[list[any]], coords: tuple[int, int]) -> set[any]:
+    """
+    Get the neighbors of a coordinate in a 2D list.
+
+    Args:
+        data (list[list[any]]): 2D list
+        coords (tuple[int, int]): x and y coordinates
+
+    Returns:
+        set[any]: The unique neighbors of the given coordinate
+
+    Raises:
+        None
+    """
+    
+    return fetch_neighbors_2d(data, coords[0], coords[1])
