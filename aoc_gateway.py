@@ -17,10 +17,18 @@ def fetch_input(year: str, day: str) -> str:
         day (str): puzzle day
 
     Returns:
-        Reponse from AoC API
+        Response from AoC API
 
     Raises:
-        None
+        DataAlreadyCached
+            If the input data has already been cached on disk, we do not want to make an API call
+            
+        APIRequestThrottled
+            If we have made an API request for puzzle input too recently, we do not want to make an API call.
+            This throttle value is set in `config.json` 
+            
+        HTTPError
+            We got a 4xx or 5xx response from AoC API
     """
     
     print(f"Fetching input data for day {day} ({year})...")
@@ -37,13 +45,31 @@ def fetch_input(year: str, day: str) -> str:
     
     config_manager.update_last_outbound_api_call_time()
 
-    if response.status_code == 200:
+    if response.status_code == 200: 
         data = response.text
+        print(f"Finished fetching input data for day {day} ({year}).")
         return data
     else:
-        raise Exception(f"AoC endpoint request failed. Status code: {response.status_code}")
+        response.raise_for_status()
     
-def submit_answer(year, day, part, answer):
+def submit_answer(year: str, day: str, part: str, answer: int) -> str:
+    """
+    Submits puzzle answer to AoC
+
+    Args:
+        year (str): puzzle year
+        day (str): puzzle day
+        part (str): puzzle part (1 or 2)
+        asnwer (int): puzzle solution
+
+    Returns:
+        Response from AoC API
+
+    Raises:
+        HTTPError
+            We got a 4xx or 5xx response from AoC API
+    """
+    
     print(f"Submiting answer for day {day} - part {part} puzzle ({year})...")
     
     url = f"https://adventofcode.com/{year}/day/{day}/answer"
@@ -56,11 +82,26 @@ def submit_answer(year, day, part, answer):
     
     if response.status_code == 200:
         data = response.text
+        print(f"Finished submiting answer for day {day} - part {part} puzzle ({year})...")
         return parse_answer_response(data)
     else:
-        raise Exception(f"AoC endpoint request failed. Status code: {response.status_code}")
+        response.raise_for_status()
     
-def fetch_leaderboard():
+def fetch_leaderboard() -> list[Participant]:
+    """
+    Fetches participant data from private leaderboard
+
+    Args:
+        None
+
+    Returns:
+        List of participants in private leaderboard. This model holds participant name, leaderboard position, and number of stars
+
+    Raises:
+        HTTPError
+            We got a 4xx or 5xx response from AoC API
+    """
+    
     print(f"Fetching private leaderboard stats...")
     
     response = requests.get(config_manager.get_config("private_leaderboard_url"), headers = fetch_headers())
@@ -111,10 +152,11 @@ def fetch_leaderboard():
             
             participants.append(participant)
             
+        print(f"Finished fetching private leaderboard stats.")
         return participants
             
     else:
-        raise Exception(f"AoC endpoint request failed. Status code: {response.status_code}") 
+        response.raise_for_status()
     
 def minutes_since_last_outbound_call():
     last_call_str = config_manager.get_config("last_outbound_api_call_time")
