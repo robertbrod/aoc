@@ -2,7 +2,7 @@
 # Advent of Code 2015 - Day 18
 
 def solve_part_one(input):
-    return 0
+    return None
 
 def solve_part_two(input):
-    return 0
+    return None

@@ -6,10 +6,10 @@ scaffolding = """
 # Advent of Code {year} - Day {day}
 
 def solve_part_one(input):
-    return 0
+    return None
 
 def solve_part_two(input):
-    return 0
+    return None
 """
 
 def create_daily_dirs(year: str) -> None:
