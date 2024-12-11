@@ -122,8 +122,6 @@ def in_bounds_2d(x: int, y: int, width: int, height: int) -> bool:
     Raises:
         None
     """
-    
-    print(f"Checking if coord is in bounds x: {x}, y: {y}, width: {width}, height: {height}")
 
     return 0 <= x < width and 0 <= y < height
 
@@ -141,7 +139,5 @@ def in_bounds(index: int, length: int) -> bool:
     Raises:
         None
     """
-    
-    print(f"Checking if index is in bounds index: {index}, length: {length}")
 
     return 0 <= index <= length
