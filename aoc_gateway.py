@@ -1,6 +1,7 @@
 import requests
 import os
 import config_manager
+import util
 from models import Participant
 from datetime import datetime
 from bs4 import BeautifulSoup
@@ -36,12 +37,12 @@ def fetch_input(year: str, day: str) -> str:
     if os.path.exists(f"{year}/{day}/{year}_{day}_input.txt"):
         raise DataAlreadyCached(f"Input data for day {day} ({year}) already cached.")
     
-    if minutes_since_last_outbound_call() < int(config_manager.get_config("outbound_api_call_throttle")):
+    if _minutes_since_last_outbound_call() < int(config_manager.get_config("outbound_api_call_throttle")):
         raise APIRequestThrottled(f"Cancelling AoC endpoint request; the last request was too recent.")
     
     url = f"https://adventofcode.com/{year}/day/{day}/input"
 
-    response = requests.get(url, headers = fetch_headers())
+    response = requests.get(url, headers = _fetch_headers())
     
     config_manager.update_last_outbound_api_call_time()
 
@@ -78,12 +79,12 @@ def submit_answer(year: str, day: str, part: str, answer: int) -> str:
         "answer": answer
     }
     
-    response = requests.post(url, headers = fetch_headers(), data = payload)
+    response = requests.post(url, headers = _fetch_headers(), data = payload)
     
     if response.status_code == 200:
         data = response.text
         print(f"Finished submiting answer for day {day} - part {part} puzzle ({year})...")
-        return parse_answer_response(data)
+        return _parse_answer_response(data)
     else:
         response.raise_for_status()
     
@@ -102,9 +103,14 @@ def fetch_leaderboard() -> list[Participant]:
             We got a 4xx or 5xx response from AoC API
     """
     
-    print(f"Fetching private leaderboard stats...")
+    if _minutes_since_last_leaderboard_call() < int(config_manager.get_config("leaderboard_api_throttle")):
+        return util.fetch_leaderboard()
     
-    response = requests.get(config_manager.get_config("private_leaderboard_url"), headers = fetch_headers())
+    print(f"Refreshing private leaderboard stats...")
+    
+    response = requests.get(config_manager.get_config("private_leaderboard_url"), headers = _fetch_headers())
+    
+    config_manager.update_last_leaderboard_api_call_time()
     
     if response.status_code == 200:
         participants = []
@@ -125,8 +131,8 @@ def fetch_leaderboard() -> list[Participant]:
                 participant.name = name_text
             
             # Parse the participant's number of stars
-            two_star_divs = row.find(class_ = 'privboard-star-both')
-            one_star_divs = row.find(class_ = 'privboard-star-firstonly')
+            two_star_divs = row.find_all(class_ = 'privboard-star-both')
+            one_star_divs = row.find_all(class_ = 'privboard-star-firstonly')
             
             total_stars = 0
             
@@ -152,26 +158,35 @@ def fetch_leaderboard() -> list[Participant]:
             
             participants.append(participant)
             
-        print(f"Finished fetching private leaderboard stats.")
+        util.cache_leaderboard(participants)
         return participants
             
     else:
         response.raise_for_status()
     
-def minutes_since_last_outbound_call():
+# ---------- Internal Functions ----------
+ 
+def _minutes_since_last_outbound_call():
     last_call_str = config_manager.get_config("last_outbound_api_call_time")
     last_call = datetime.fromisoformat(last_call_str)
     current_time = datetime.now()
     time_difference = current_time - last_call
     return time_difference.total_seconds() / 60
 
-def fetch_headers():
+def _minutes_since_last_leaderboard_call():
+    last_call_str = config_manager.get_config("last_leaderboard_api_call_time")
+    last_call = datetime.fromisoformat(last_call_str)
+    current_time = datetime.now()
+    time_difference = current_time - last_call
+    return time_difference.total_seconds() / 60
+
+def _fetch_headers():
     return {
         "User-Agent": config_manager.get_config("user_data")["user_agent"],
         "Cookie": os.getenv("AOC_COOKIE")
     }
     
-def parse_answer_response(response):
+def _parse_answer_response(response):
     soup = BeautifulSoup(response, 'html.parser')
     
     article = soup.find('article')

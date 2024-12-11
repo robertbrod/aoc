@@ -26,3 +26,6 @@ def set_config(key, value):
     
 def update_last_outbound_api_call_time():
     set_config("last_outbound_api_call_time", datetime.now().isoformat())
+    
+def update_last_leaderboard_api_call_time():
+    set_config("last_leaderboard_api_call_time", datetime.now().isoformat())

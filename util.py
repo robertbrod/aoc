@@ -1,4 +1,6 @@
 import os
+from models import Participant
+import json
 
 scaffolding = """
 # Advent of Code {year} - Day {day}
@@ -49,7 +51,8 @@ def cache_input(data: str, year: str, day: str) -> None:
         None
 
     Raises:
-        None
+        Exception
+            Encountered error while writing to disk
     """
     
     print(f"Attempting to cache puzzle input...")
@@ -57,6 +60,35 @@ def cache_input(data: str, year: str, day: str) -> None:
     try:
         with open(f"{year}/{day}/{year}_{day}_input.txt", "w") as file:
             file.write(data)
+        
+        print(f"Successfully cached puzzle input.")
+    except Exception as error:
+        print(f"Failed to cache puzzle input: {error}")
+        
+def cache_leaderboard(data: list[Participant]) -> None:
+    """
+    Writes private leaderboard data to disk. Saves to `leaderboard.txt`
+
+    Args:
+        data (str): Parsed response from AoC API
+
+    Returns:
+        None
+
+    Raises:
+        Exception
+            Encountered error while writing to disk
+    """
+    
+    print(f"Attempting to cache private leaderboard data...")
+    
+    participant_data = [participant.to_json() for participant in data]
+    
+    try:
+        with open("leaderboard.txt", "w") as file:
+            json.dump(participant_data, file, indent = 4)
+            
+        print(f"Successfully cached private leaderboard data.")
     except Exception as error:
         print(f"Failed to cache puzzle input: {error}")
         
@@ -72,16 +104,49 @@ def fetch_input(year: str, day: str) -> str:
         str: The contents of the file
 
     Raises:
-        None
+        FileNotFoundError
+            File does not exist
     """
     
-    print(f"Attempting to fetch puzzle input...")
+    print(f"Attempting to fetch cached puzzle input...")
     
     try:
         with open(f"{year}/{day}/{year}_{day}_input.txt", "r") as file:
+            print(f"Successfully fetched cached puzzle input.")
             return file.read()
-    except Exception as error:
-        print(f"Failed to fetch puzzle input: {error}")
+    except FileNotFoundError:
+        print(f"{year}/{day}/{year}_{day}_input.txt not found.")
+        
+def fetch_leaderboard() -> list[Participant]:
+    """
+    Reads private leaderboard data from file. File must exist at `leaderboard.txt`
+
+    Args:
+        None
+
+    Returns:
+        list[Participant]: List of participant data
+
+    Raises:
+        FileNotFoundError
+            File does not exist
+        JSONDecodeError
+            Fle contains malformed JSON data
+    """
+    
+    print("Attempting to fetch cached private leaderboard data...")
+    
+    try:
+        with open("leaderboard.txt", "r") as file:
+            data = json.load(file)
+            
+        print("Successfully fetched cached private leaderboard data.")
+        return [Participant.load(participant) for participant in data]
+    except FileNotFoundError:
+        print(f"leaderboard.txt not found. Returning an empty list.")
+        return []
+    except json.JSONDecodeError:
+        print(f"leaderboard.txt contains invalid JSON. Returning an empty list.")
     
 def fetch_sample_input(year: str, day: str) -> str:
     """
@@ -102,6 +167,7 @@ def fetch_sample_input(year: str, day: str) -> str:
     
     try:
         with open(f"{year}/{day}/sample_input.txt", "r") as file:
+            print("Successfully fetched cached sample puzzle input.")
             return file.read()
     except Exception as error:
         print(f"Failed to fetch sample puzzle input: {error}")
