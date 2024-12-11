@@ -8,6 +8,7 @@ from bs4 import BeautifulSoup
 from exceptions import DataAlreadyCached
 from exceptions import APIRequestThrottled
 
+@staticmethod
 def fetch_input(year: str, day: str) -> str:
     """
     Writes puzzle input data to disk. Saves to `year/day/year_day_input.txt`
