@@ -21,8 +21,8 @@
     },
     {
         "name": "robertbrod",
-        "position": 5,
-        "stars": 21
+        "position": null,
+        "stars": 22
     },
     {
         "name": "Jeremy Vidaurri",
