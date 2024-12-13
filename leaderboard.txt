@@ -2,12 +2,12 @@
     {
         "name": "Bassel T",
         "position": 1,
-        "stars": 24
+        "stars": 26
     },
     {
         "name": "Austin Owensby",
         "position": 2,
-        "stars": 24
+        "stars": 26
     },
     {
         "name": "Jeremy Vidaurri",
@@ -22,7 +22,7 @@
     {
         "name": "Tim Hopper",
         "position": 5,
-        "stars": 23
+        "stars": 24
     },
     {
         "name": "robertbrod",
@@ -42,7 +42,7 @@
     {
         "name": "Alaina Arnold",
         "position": 9,
-        "stars": 21
+        "stars": 22
     },
     {
         "name": "Brian Lemke",
@@ -65,14 +65,14 @@
         "stars": 11
     },
     {
-        "name": "Grant Bridges",
+        "name": "Wade Moore",
         "position": 14,
-        "stars": 8
+        "stars": 11
     },
     {
-        "name": "Wade Moore",
+        "name": "Grant Bridges",
         "position": 15,
-        "stars": 10
+        "stars": 8
     },
     {
         "name": "JD Farst",

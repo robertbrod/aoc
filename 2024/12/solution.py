@@ -79,11 +79,17 @@ def flood_fill_two(garden, x, y, plot, visited, region):
             
     return region
 
+def is_neighbor(point, garden_map, label):
+    x, y = point[0], point[1]
+
+    if util.in_bounds_2d(x, y, len(garden_map[0]), len(garden_map)) and garden_map[y][x] == label:
+        return True
+    
+    return False
+
 def solve_part_two(input):
     total_price = 0
     garden = parse_input(input)
-    garden_width = len(garden[0])
-    garden_height = len(garden)
     
     visited = set()
     regions = []
@@ -93,30 +99,32 @@ def solve_part_two(input):
                 region = []
                 flood_fill_two(garden, x, y, garden[y][x], visited, region)
                 regions.append((garden[y][x], region))
-                
+    
     for region in regions:
-        region_label = region[0]
-        coords = region[1]
-        area = len(coords)
+        label, points = region
+        area = len(points)
         corners = 0
-        
-        for coord in coords:
-            north_neighbor = (coord[0], coord[1] - 1)
-            north_east_neighbor = (coord[0] + 1, coord[1] - 1)
-            east_neighbor = (coord[0] + 1, coord[1])
-            south_east_neighbor = (coord[0] + 1, coord[1] + 1)
-            south_neighbor = (coord[0], coord[1] + 1)
-            south_west_neighbor = (coord[0] - 1, coord[1] + 1)
-            west_neighbor = (coord[0] - 1, coord[1])
-            north_west_neighbor = (coord[0] - 1, coord[1] - 1)
-            
-            # opposing neighbors 1 (north->south)
-            if util.in_bounds_2d(north_neighbor[0], north_neighbor[1], garden_width, garden_height) and util.in_bounds_2d(south_neighbor[0], south_neighbor[1], garden_width, garden_height) and garden[north_neighbor[1]][north_neighbor[0]] != region_label and garden[south_neighbor[1]][south_neighbor[0]] != region_label:
-                continue
-            # opposing neighbors 2 (east->west)
-            elif util.in_bounds_2d(east_neighbor[0], east_neighbor[1], garden_width, garden_height) and util.in_bounds_2d(east_neighbor[0], east_neighbor[1], garden_width, garden_height) and garden[east_neighbor[1]][east_neighbor[0]] != region_label and garden[west_neighbor[1]][west_neighbor[0]] != region_label:
-                continue
-            
-        total_price += (area * corners)
+        for point in points:
+            x = point[0]
+            y = point[1]
 
+            # northwest vertex
+            if (is_neighbor((x - 1, y), garden, label) and is_neighbor((x, y - 1), garden, label) and not is_neighbor((x - 1, y - 1), garden, label)) or (not is_neighbor((x - 1, y), garden, label) and not is_neighbor((x, y - 1), garden, label)):
+                corners += 1
+
+            # northeast vertex
+            if (is_neighbor((x + 1, y), garden, label) and is_neighbor((x, y - 1), garden, label) and not is_neighbor((x + 1, y - 1), garden, label)) or (not is_neighbor((x + 1, y), garden, label) and not is_neighbor((x, y - 1), garden, label)):
+                corners += 1
+
+            # southwest vertex
+            if (is_neighbor((x - 1, y), garden, label) and is_neighbor((x, y + 1), garden, label) and not is_neighbor((x - 1, y + 1), garden, label)) or (not is_neighbor((x - 1, y), garden, label) and not is_neighbor((x, y + 1), garden, label)):
+                corners += 1
+
+            # southeast vertex
+            if (is_neighbor((x + 1, y), garden, label) and is_neighbor((x, y + 1), garden, label) and not is_neighbor((x + 1, y + 1), garden, label)) or (not is_neighbor((x + 1, y), garden, label) and not is_neighbor((x, y + 1), garden, label)):
+                corners += 1
+
+        total_price += (area * corners)
+        print(f"Plot {label}: Area = {area}, Sides = {corners}")
+    
     return total_price
