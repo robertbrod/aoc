@@ -27,12 +27,12 @@
     {
         "name": "Jeremy Vidaurri",
         "position": 6,
-        "stars": 20
+        "stars": 21
     },
     {
         "name": "Brian Mathews",
         "position": 7,
-        "stars": 20
+        "stars": 21
     },
     {
         "name": "Alaina Arnold",
@@ -97,7 +97,7 @@
     {
         "name": "akrislock-capsher",
         "position": 20,
-        "stars": 3
+        "stars": 4
     },
     {
         "name": "BigOlYeet",
