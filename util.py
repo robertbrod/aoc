@@ -224,14 +224,13 @@ def get_middle_object(data: list[any]) -> any:
     
     return data[int(len(data) / 2)]
 
-def fetch_neighbors_2d(data: list[list[any]], x: int, y: int) -> set[any]:
+def fetch_neighbors_2d(data: list[list[any]], coords: tuple[int, int]) -> set[any]:
     """
     Get the neighbors of a coordinate in a 2D list.
 
     Args:
         data (list[list[any]]): 2D list
-        x (int): x coord
-        y (int): y coord
+        coords (tuple[int, int]): x and y coordinates
 
     Returns:
         set[any]: The unique neighbors of the given coordinate
@@ -240,6 +239,7 @@ def fetch_neighbors_2d(data: list[list[any]], x: int, y: int) -> set[any]:
         None
     """
     
+    x, y = coords[0], coords[1]
     neighbors = set()
     width = len(data[0])
     height = len(data)
@@ -265,20 +265,3 @@ def fetch_neighbors_2d(data: list[list[any]], x: int, y: int) -> set[any]:
         neighbors.add((x + dx, y + dy))
 
     return neighbors
-
-def fetch_neighbors_2d(data: list[list[any]], coords: tuple[int, int]) -> set[any]:
-    """
-    Get the neighbors of a coordinate in a 2D list.
-
-    Args:
-        data (list[list[any]]): 2D list
-        coords (tuple[int, int]): x and y coordinates
-
-    Returns:
-        set[any]: The unique neighbors of the given coordinate
-
-    Raises:
-        None
-    """
-    
-    return fetch_neighbors_2d(data, coords[0], coords[1])

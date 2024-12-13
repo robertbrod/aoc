@@ -7,17 +7,17 @@
     {
         "name": "Austin Owensby",
         "position": 2,
-        "stars": 23
-    },
-    {
-        "name": "Brian Mathews",
-        "position": 3,
         "stars": 24
     },
     {
         "name": "Jeremy Vidaurri",
+        "position": 3,
+        "stars": 24
+    },
+    {
+        "name": "Brian Mathews",
         "position": 4,
-        "stars": 23
+        "stars": 24
     },
     {
         "name": "Tim Hopper",
@@ -25,19 +25,19 @@
         "stars": 23
     },
     {
-        "name": "ealexrose",
-        "position": 6,
-        "stars": 21
-    },
-    {
         "name": "robertbrod",
-        "position": 7,
-        "stars": 22
+        "position": 6,
+        "stars": 23
     },
     {
         "name": "Travis Williamson",
+        "position": 7,
+        "stars": 23
+    },
+    {
+        "name": "ealexrose",
         "position": 8,
-        "stars": 22
+        "stars": 20
     },
     {
         "name": "Alaina Arnold",
@@ -52,7 +52,7 @@
     {
         "name": "Joshua Johnston",
         "position": 11,
-        "stars": 10
+        "stars": 11
     },
     {
         "name": "KoryMWx20",
@@ -97,7 +97,7 @@
     {
         "name": "akrislock-capsher",
         "position": 20,
-        "stars": 5
+        "stars": 6
     },
     {
         "name": "BigOlYeet",
