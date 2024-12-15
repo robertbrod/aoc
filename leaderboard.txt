@@ -32,7 +32,7 @@
     {
         "name": "robertbrod",
         "position": 7,
-        "stars": 26
+        "stars": 27
     },
     {
         "name": "ealexrose",
