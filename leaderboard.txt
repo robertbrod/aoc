@@ -2,42 +2,42 @@
     {
         "name": "Bassel T",
         "position": 1,
-        "stars": 26
+        "stars": 28
     },
     {
         "name": "Austin Owensby",
         "position": 2,
-        "stars": 26
-    },
-    {
-        "name": "Brian Mathews",
-        "position": 3,
-        "stars": 26
-    },
-    {
-        "name": "Tim Hopper",
-        "position": 4,
-        "stars": 26
+        "stars": 28
     },
     {
         "name": "Jeremy Vidaurri",
+        "position": 3,
+        "stars": 28
+    },
+    {
+        "name": "Brian Mathews",
+        "position": 4,
+        "stars": 28
+    },
+    {
+        "name": "Tim Hopper",
         "position": 5,
-        "stars": 24
+        "stars": 28
     },
     {
         "name": "Travis Williamson",
         "position": 6,
-        "stars": 25
+        "stars": 28
     },
     {
         "name": "robertbrod",
         "position": 7,
-        "stars": 25
+        "stars": 26
     },
     {
         "name": "ealexrose",
         "position": 8,
-        "stars": 20
+        "stars": 22
     },
     {
         "name": "Alaina Arnold",
@@ -47,7 +47,7 @@
     {
         "name": "Brian Lemke",
         "position": 10,
-        "stars": 16
+        "stars": 20
     },
     {
         "name": "Joshua Johnston",
@@ -105,14 +105,14 @@
         "stars": 3
     },
     {
-        "name": "emmelineblevins",
+        "name": "Fletch-SC",
         "position": 22,
-        "stars": 2
+        "stars": 4
     },
     {
-        "name": "Fletch-SC",
-        "position": null,
-        "stars": 3
+        "name": "emmelineblevins",
+        "position": 23,
+        "stars": 2
     },
     {
         "name": "joshuabjohnston",
