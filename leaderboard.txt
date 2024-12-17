@@ -1,53 +1,53 @@
 [
     {
-        "name": "Bassel T",
-        "position": 1,
-        "stars": 28
-    },
-    {
         "name": "Austin Owensby",
-        "position": 2,
-        "stars": 28
+        "position": 1,
+        "stars": 32
     },
     {
-        "name": "Jeremy Vidaurri",
-        "position": 3,
-        "stars": 28
+        "name": "Bassel T",
+        "position": 2,
+        "stars": 31
     },
     {
         "name": "Brian Mathews",
-        "position": 4,
-        "stars": 28
-    },
-    {
-        "name": "Tim Hopper",
-        "position": 5,
-        "stars": 28
+        "position": 3,
+        "stars": 32
     },
     {
         "name": "Travis Williamson",
-        "position": 6,
-        "stars": 28
+        "position": 4,
+        "stars": 31
+    },
+    {
+        "name": "Jeremy Vidaurri",
+        "position": 5,
+        "stars": 30
     },
     {
         "name": "robertbrod",
+        "position": 6,
+        "stars": 29
+    },
+    {
+        "name": "Tim Hopper",
         "position": 7,
-        "stars": 27
+        "stars": 28
     },
     {
         "name": "ealexrose",
         "position": 8,
-        "stars": 22
+        "stars": 24
     },
     {
         "name": "Alaina Arnold",
         "position": 9,
-        "stars": 23
+        "stars": 26
     },
     {
         "name": "Brian Lemke",
         "position": 10,
-        "stars": 20
+        "stars": 26
     },
     {
         "name": "Joshua Johnston",
