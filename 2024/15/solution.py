@@ -122,24 +122,27 @@ def move_box(warehouse_map, robot_position, box_coord, movement):
         while can_move and not fully_open:
             y_level -= 1
             fully_open = True
+            x_positions_to_add = []
+            x_positions.update(x_positions_to_add)
+            x_positions_to_add.clear()
             for x in x_positions:
                 if warehouse_map[y_level][x] == '#':
                     can_move = False
                 elif warehouse_map[y_level][x] in box_symbols:
                     if warehouse_map[y_level - 1][x] == '[' and warehouse_map[y_level][x] == ']':
-                        x_positions.add(x - 1)
+                        x_positions_to_add.append(x - 1)
                     elif warehouse_map[y_level - 1][x] == ']' and warehouse_map[y_level][x] == '[':
-                        x_positions.add(x + 1)
+                        x_positions_to_add.append(x + 1)
                     
                     fully_open = False
 
         if can_move:
-            for y in range(abs(y_level - box_coord[1]) - 1, -1, -1):  
+            for y_offset in range(0, abs(y_level - box_coord[1]) + 1):
                 for x in x_positions:
-                    if y == abs(y_level - box_coord[1]) - 1:
-                        warehouse_map[y][x] = '.'
+                    if y_offset == abs(y_level - box_coord[1]):
+                        warehouse_map[y_level + y_offset][x] = '.'
                     else:
-                        warehouse_map[y + 1][x] = warehouse_map[y][x]
+                        warehouse_map[y_level + y_offset][x] = warehouse_map[y_level + y_offset + 1][x]
     elif movement == 'v':
         x_positions = set()
         y_level = box_coord[1]
@@ -155,24 +158,27 @@ def move_box(warehouse_map, robot_position, box_coord, movement):
         while can_move and not fully_open:
             y_level += 1
             fully_open = True
+            x_positions_to_add = []
+            x_positions.update(x_positions_to_add)
+            x_positions_to_add.clear()
             for x in x_positions:
                 if warehouse_map[y_level][x] == '#':
                     can_move = False
                 elif warehouse_map[y_level][x] in box_symbols:
-                    if warehouse_map[y_level - 1][x] == '[' and warehouse_map[y_level][x] == ']':
-                        x_positions.add(x - 1)
-                    elif warehouse_map[y_level - 1][x] == ']' and warehouse_map[y_level][x] == '[':
-                        x_positions.add(x + 1)
+                    if warehouse_map[y_level + 1][x] == '[' and warehouse_map[y_level][x] == ']':
+                        x_positions_to_add.append(x - 1)
+                    elif warehouse_map[y_level + 1][x] == ']' and warehouse_map[y_level][x] == '[':
+                        x_positions_to_add.append(x + 1)
                     
                     fully_open = False
 
         if can_move:
-            for y in range(abs(y_level - box_coord[1]) - 1, -1, -1):  
+            for y_offset in range(0, abs(y_level - box_coord[1]) + 1):
                 for x in x_positions:
-                    if y == abs(y_level - box_coord[1]) - 1:
-                        warehouse_map[y][x] = '.'
+                    if y_offset == abs(y_level - box_coord[1]):
+                        warehouse_map[y_level - y_offset][x] = '.'
                     else:
-                        warehouse_map[y - 1][x] = warehouse_map[y][x]
+                        warehouse_map[y_level - y_offset][x] = warehouse_map[y_level - y_offset - 1][x]
                     
     return can_move
 
