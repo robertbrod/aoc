@@ -70,20 +70,20 @@ def move_box(warehouse_map, robot_position, box_coord, movement):
             if warehouse_map[next_pos_y][next_pos_x] == '#':
                 can_move = False
             elif warehouse_map[next_pos_y][next_pos_x] == '.':
-                coord = (next_pos_x, next_pos_y)
+                coord = (next_pos_x, next_pos_y) 
                 break
             else:
                 coord = (next_pos_x, next_pos_y)
 
         if can_move:
-            left_bracket = True
+            left_bracket = False
             # Make the move
-            for index in range(0, max(2, abs(robot_position[0] - box_coord[0]))):
+            for index in range(0, max(2, abs(coord[0] - box_coord[0]))):
                 if left_bracket:
-                    warehouse_map[coord[1]][coord[0] + index] = '['
+                    warehouse_map[coord[1]][coord[0] + 1 - index] = '['
                     left_bracket = False
                 else:
-                    warehouse_map[coord[1]][coord[0] + index] = ']'
+                    warehouse_map[coord[1]][coord[0] + 1 - index] = ']'
                     left_bracket = True  
     elif movement == '>':
         # Check if we can move
@@ -100,12 +100,12 @@ def move_box(warehouse_map, robot_position, box_coord, movement):
         if can_move:
             left_bracket = True
             # Make the move
-            for index in range(0, max(2, abs(robot_position[0] - box_coord[0]))):
+            for index in range(0, max(2, abs(coord[0] - box_coord[0]) + 1)):
                 if left_bracket:
-                    warehouse_map[coord[1]][coord[0] + index] = '['
+                    warehouse_map[box_coord[1]][box_coord[0] + 1 + index] = '['
                     left_bracket = False
                 else:
-                    warehouse_map[coord[1]][coord[0] + index] = ']'
+                    warehouse_map[box_coord[1]][box_coord[0] + 1 + index] = ']'
                     left_bracket = True     
     elif movement == '^':
         x_positions = set()
