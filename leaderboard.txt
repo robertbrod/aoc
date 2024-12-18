@@ -67,7 +67,7 @@
     {
         "name": "Wade Moore",
         "position": 14,
-        "stars": 11
+        "stars": 12
     },
     {
         "name": "Grant Bridges",
