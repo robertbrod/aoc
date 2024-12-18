@@ -1,33 +1,33 @@
 [
     {
-        "name": "Austin Owensby",
+        "name": "Bassel T",
         "position": 1,
-        "stars": 34
+        "stars": 36
     },
     {
-        "name": "Bassel T",
+        "name": "Austin Owensby",
         "position": 2,
-        "stars": 33
+        "stars": 36
     },
     {
         "name": "Brian Mathews",
         "position": 3,
-        "stars": 32
+        "stars": 34
     },
     {
         "name": "Travis Williamson",
         "position": 4,
-        "stars": 32
+        "stars": 34
     },
     {
         "name": "Jeremy Vidaurri",
         "position": 5,
-        "stars": 30
+        "stars": 31
     },
     {
         "name": "robertbrod",
         "position": 6,
-        "stars": 29
+        "stars": 30
     },
     {
         "name": "Tim Hopper",
