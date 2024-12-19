@@ -2,6 +2,7 @@
 
 import heapq
 import util
+from collections import defaultdict, deque
 
 DIRECTIONS = [(-1, 0), (1, 0), (0, -1), (0, 1)]
 
@@ -87,26 +88,6 @@ def astar(maze, start, end):
             
     return None
 
-def dfs_all_paths(maze, current, end, visited, path, all_paths):
-    x, y = current
-
-    # Base case
-    if current == end:
-        all_paths.append(path.copy()[::-1])
-        return
-    
-    visited.add(current)
-
-    for direction in DIRECTIONS:
-        nx, ny = x + direction[0], y + direction[1]
-
-        if util.in_bounds_2d(nx, ny, len(maze[0]), len(maze)) and maze[ny][nx] != '#' and (nx, ny) not in visited:
-            path.append((nx, ny))
-            dfs_all_paths(maze, (nx, ny), end, visited, path, all_paths)
-            path.pop()
-
-    visited.remove(current)
-
 def compute_cost(path):
     cost = 0
     
@@ -119,58 +100,10 @@ def compute_cost(path):
         
     return cost
 
-def compute_direction(direction, node_direction):
-    dx, dy = direction
-    nx, ny = node_direction
-
-    if nx < dx:
-        return (-1, 0)
-    elif nx > dx:
-        return (1, 0)
-    elif ny < dy:
-        return (0, -1)
-    else:
-        return (0, 1)
-
-def prune_paths(all_paths):
-    score_dic = {}
-
-    for path in all_paths:
-        score = 0 
-        last_direction = (1, 0)
-        last_point = path[0]
-        for pi, point in enumerate(path):
-            if point == path[0]:
-                continue
-            node_direction = compute_direction(last_point, point)
-            if node_direction != last_direction:
-                score += 1000
-            score += 1
-            last_direction = node_direction
-            last_point = point
-
-        if score in score_dic:
-            score_dic[score].append(path)
-        else: 
-            score_dic[score] = [path]
-
-    smallest_score = min(score_dic.keys())
-    
-    return score_dic[smallest_score]
-
 def solve_part_one(input):
     start, end, maze = parse_input(input)
     path = astar(maze, start, end)
     return compute_cost(path)
 
 def solve_part_two(input):
-    start, end, maze = parse_input(input)
-    all_paths = []
-    dfs_all_paths(maze, start, end, set(), [start], all_paths)
-    pruned_paths = prune_paths(all_paths)
-    tiles = set()
-    for path in pruned_paths:
-        for point in path:
-            tiles.add(point)
-    total_tiles = len(tiles)
-    return total_tiles
+    return None
