@@ -22,7 +22,7 @@
     {
         "name": "Jeremy Vidaurri",
         "position": 5,
-        "stars": 32
+        "stars": 34
     },
     {
         "name": "robertbrod",

@@ -128,9 +128,9 @@ def move_box(warehouse_map, box_coord, movement):
         fully_open = False
 
         next_box_row = []
+        box_row_pointer = 0
         while can_move and not fully_open:
             fully_open = True
-            box_row_pointer = 0
 
             for boxes in box_positions[box_row_pointer]:
                 bx = boxes[0]
@@ -143,9 +143,11 @@ def move_box(warehouse_map, box_coord, movement):
                 if n_object == '#':
                     can_move = False
                     fully_open = False
-                elif neighbor == '.':
+                    break
+                elif n_object == '.':
                     continue
                 else:
+                    fully_open = False
                     if box == '[' and n_object == ']':
                         next_box_row.append((bx, ny))
                         next_box_row.append((bx - 1, ny))
@@ -159,6 +161,7 @@ def move_box(warehouse_map, box_coord, movement):
                         
             if next_box_row:
                 box_positions.append(next_box_row)
+                next_box_row.clear()
 
         if can_move:
             for box_position_row in box_positions:
@@ -195,9 +198,9 @@ def move_box(warehouse_map, box_coord, movement):
         fully_open = False
 
         next_box_row = []
+        box_row_pointer = 0
         while can_move and not fully_open:
             fully_open = True
-            box_row_pointer = 0
 
             for boxes in box_positions[box_row_pointer]:
                 bx = boxes[0]
@@ -210,9 +213,11 @@ def move_box(warehouse_map, box_coord, movement):
                 if n_object == '#':
                     can_move = False
                     fully_open = False
-                elif neighbor == '.':
+                    break
+                elif n_object == '.':
                     continue
                 else:
+                    fully_open = False
                     if box == '[' and n_object == ']':
                         next_box_row.append((bx, ny))
                         next_box_row.append((bx - 1, ny))
@@ -222,10 +227,11 @@ def move_box(warehouse_map, box_coord, movement):
                     else:
                         next_box_row.append((bx, ny))
                 
-                box_row_pointer += 1
+            box_row_pointer += 1
                         
             if next_box_row:
                 box_positions.append(next_box_row)
+                next_box_row.clear()
 
         if can_move:
             for box_position_row in box_positions:
@@ -255,7 +261,7 @@ def move_robot(warehouse_map, movements, robot_pos):
 
 
         if movement == '<':
-            neighbor_coord, neighbor = fetch_neighbor_1(robot_position, movement, warehouse_map)
+            neighbor_coord, neighbor = fetch_neighbor(robot_position, movement, warehouse_map)
             if neighbor == '#':
                 continue
             # We ran into a box
@@ -275,7 +281,7 @@ def move_robot(warehouse_map, movements, robot_pos):
                 robot_position = new_robot_pos
 
         elif movement == '>':
-            neighbor_coord, neighbor = fetch_neighbor_1(robot_position, movement, warehouse_map)
+            neighbor_coord, neighbor = fetch_neighbor(robot_position, movement, warehouse_map)
             if neighbor == '#':
                 continue
             # We ran into a box
@@ -295,7 +301,7 @@ def move_robot(warehouse_map, movements, robot_pos):
                 robot_position = new_robot_pos
 
         elif movement == '^':
-            neighbor_coord, neighbor = fetch_neighbor_1(robot_position, movement, warehouse_map)
+            neighbor_coord, neighbor = fetch_neighbor(robot_position, movement, warehouse_map)
             if neighbor == '#':
                 continue
             # We ran into a box
@@ -315,7 +321,7 @@ def move_robot(warehouse_map, movements, robot_pos):
                 robot_position = new_robot_pos
 
         elif movement == 'v':
-            neighbor_coord, neighbor = fetch_neighbor_1(robot_position, movement, warehouse_map)
+            neighbor_coord, neighbor = fetch_neighbor(robot_position, movement, warehouse_map)
             if neighbor == '#':
                 continue
             # We ran into a box

@@ -1,7 +1,7 @@
 {
     "last_outbound_api_call_time": "2024-12-18T10:34:50.318459",
     "outbound_api_call_throttle": "10",
-    "last_leaderboard_api_call_time": "2024-12-18T20:07:59.124720",
+    "last_leaderboard_api_call_time": "2024-12-18T22:02:47.211000",
     "leaderboard_api_throttle": 15,
     "user_data": {
         "user_agent": "https://github.com/robertbrod/aoc by robbrod93@gmail.com"
