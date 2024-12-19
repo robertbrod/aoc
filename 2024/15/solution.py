@@ -57,13 +57,13 @@ def fetch_neighbor(coord, movement, warehouse_map) -> tuple[tuple[int, int], str
         else:
             return (x, y + 1), warehouse_map[y + 1][x]
         
-def move_box(warehouse_map, robot_position, box_coord, movement):
+def move_box(warehouse_map, box_coord, movement):
     can_move = True
-    box_symbols = ['[', ']']
 
     if movement == '<':
         dx = -1
         neighbors_to_move = []
+        neighbors_to_move.append(box_coord[0])
         while can_move:
             nx = box_coord[0] + dx
             ny = box_coord[1]
@@ -79,7 +79,7 @@ def move_box(warehouse_map, robot_position, box_coord, movement):
 
         if can_move:
             ny = box_coord[1]
-            for nx in neighbors_to_move:
+            for nx in sorted(neighbors_to_move):
                 warehouse_map[ny][nx - 1] = warehouse_map[ny][nx]
             
             warehouse_map[box_coord[1]][box_coord[0]] = '.'
@@ -87,6 +87,7 @@ def move_box(warehouse_map, robot_position, box_coord, movement):
     elif movement == '>':
         dx = 1
         neighbors_to_move = []
+        neighbors_to_move.append(box_coord[0])
         while can_move:
             nx = box_coord[0] + dx
             ny = box_coord[1]
@@ -102,7 +103,7 @@ def move_box(warehouse_map, robot_position, box_coord, movement):
 
         if can_move:
             ny = box_coord[1]
-            for nx in neighbors_to_move:
+            for nx in sorted(neighbors_to_move, reverse=True):
                 warehouse_map[ny][nx + 1] = warehouse_map[ny][nx]
             
             warehouse_map[box_coord[1]][box_coord[0]] = '.'
@@ -110,28 +111,32 @@ def move_box(warehouse_map, robot_position, box_coord, movement):
     elif movement == '^':
         dy = -1
         box_positions = []
+        neighbor = warehouse_map[box_coord[1]][box_coord[0]]
 
+        initial_box_row = []
         if neighbor == '[':
-            box_positions.append((box_coord[0], box_coord))
-            box_positions.append((box_coord[0] + 1, box_coord))
+            initial_box_row.append((box_coord[0], box_coord[1]))
+            initial_box_row.append((box_coord[0] + 1, box_coord[1]))
         elif neighbor == ']':
-            box_positions.append((box_coord[0], box_coord))
-            box_positions.append((box_coord[0] - 1, box_coord))
+            initial_box_row.append((box_coord[0], box_coord[1]))
+            initial_box_row.append((box_coord[0] - 1, box_coord[1]))
+        box_positions.append(initial_box_row)
 
         neighbors_to_move = []
 
         # Indicates whether we have full clearance to move all potential boxes
-        fully_open = True
+        fully_open = False
 
+        next_box_row = []
         while can_move and not fully_open:
+            fully_open = True
             box_row_pointer = 0
-            next_box_row = []
 
             for boxes in box_positions[box_row_pointer]:
                 bx = boxes[0]
                 by = boxes[1]
                 nx = bx
-                ny = ny + dy
+                ny = by + dy
                 box = warehouse_map[by][bx]
                 n_object = warehouse_map[ny][nx]
 
@@ -142,22 +147,121 @@ def move_box(warehouse_map, robot_position, box_coord, movement):
                     continue
                 else:
                     if box == '[' and n_object == ']':
-                        # WHERE WE LEFT OFF
+                        next_box_row.append((bx, ny))
+                        next_box_row.append((bx - 1, ny))
+                    elif box == ']' and n_object == '[':
+                        next_box_row.append((bx, ny))
+                        next_box_row.append((bx + 1, ny))
+                    else:
+                        next_box_row.append((bx, ny))
 
+            box_row_pointer += 1
+                        
+            if next_box_row:
+                box_positions.append(next_box_row)
 
+        if can_move:
+            for box_position_row in box_positions:
+                for box_position in box_position_row:
+                    bx = box_position[0]
+                    by = box_position[1]
+                    box_to_move = warehouse_map[by][bx]
+                    warehouse_map[by - 1][bx] = box_to_move
+
+            if neighbor == '[':
+                warehouse_map[box_coord[1]][box_coord[0]] = '.'
+                warehouse_map[box_coord[1]][box_coord[0] + 1] = '.'
+            elif neighbor == ']':
+                warehouse_map[box_coord[1]][box_coord[0]] = '.'
+                warehouse_map[box_coord[1]][box_coord[0] - 1] = '.'
+
+    elif movement == 'v':
+        dy = 1
+        box_positions = []
+        neighbor = warehouse_map[box_coord[1]][box_coord[0]]
+
+        initial_box_row = []
+        if neighbor == '[':
+            initial_box_row.append((box_coord[0], box_coord[1]))
+            initial_box_row.append((box_coord[0] + 1, box_coord[1]))
+        elif neighbor == ']':
+            initial_box_row.append((box_coord[0], box_coord[1]))
+            initial_box_row.append((box_coord[0] - 1, box_coord[1]))
+        box_positions.append(initial_box_row)
+
+        neighbors_to_move = []
+
+        # Indicates whether we have full clearance to move all potential boxes
+        fully_open = False
+
+        next_box_row = []
+        while can_move and not fully_open:
+            fully_open = True
+            box_row_pointer = 0
+
+            for boxes in box_positions[box_row_pointer]:
+                bx = boxes[0]
+                by = boxes[1]
+                nx = bx
+                ny = by + dy
+                box = warehouse_map[by][bx]
+                n_object = warehouse_map[ny][nx]
+
+                if n_object == '#':
+                    can_move = False
+                    fully_open = False
+                elif neighbor == '.':
+                    continue
+                else:
+                    if box == '[' and n_object == ']':
+                        next_box_row.append((bx, ny))
+                        next_box_row.append((bx - 1, ny))
+                    elif box == ']' and n_object == '[':
+                        next_box_row.append((bx, ny))
+                        next_box_row.append((bx + 1, ny))
+                    else:
+                        next_box_row.append((bx, ny))
+                
+                box_row_pointer += 1
+                        
+            if next_box_row:
+                box_positions.append(next_box_row)
+
+        if can_move:
+            for box_position_row in box_positions:
+                for box_position in box_position_row:
+                    bx = box_position[0]
+                    by = box_position[1]
+                    box_to_move = warehouse_map[by][bx]
+                    warehouse_map[by + 1][bx] = box_to_move
+
+            if neighbor == '[':
+                warehouse_map[box_coord[1]][box_coord[0]] = '.'
+                warehouse_map[box_coord[1]][box_coord[0] + 1] = '.'
+            elif neighbor == ']':
+                warehouse_map[box_coord[1]][box_coord[0]] = '.'
+                warehouse_map[box_coord[1]][box_coord[0] - 1] = '.'
+
+    return can_move
 
 def move_robot(warehouse_map, movements, robot_pos):
     robot_position = robot_pos
+    box_symbols = ['[', ']']
+    for row in warehouse_map:
+            print("".join(row))
             
-    for movement in movements:
+    for i, movement in enumerate(movements):
+        print(f"Movement: {movement}")
+
+
         if movement == '<':
             neighbor_coord, neighbor = fetch_neighbor_1(robot_position, movement, warehouse_map)
             if neighbor == '#':
                 continue
             # We ran into a box
-            if neighbor == 'O':
+            if neighbor in box_symbols:
                 # Try to move box
-                if move_box_1(warehouse_map, robot_position, neighbor_coord, movement):
+                if move_box(warehouse_map, neighbor_coord, movement):
                     # If we were able to move the box, move the robot
                     new_robot_pos = (robot_position[0] - 1, robot_position[1])
                     warehouse_map[robot_position[1]][robot_position[0]] = '.'
@@ -175,9 +279,9 @@ def move_robot(warehouse_map, movements, robot_pos):
             if neighbor == '#':
                 continue
             # We ran into a box
-            if neighbor == 'O':
+            if neighbor in box_symbols:
                 # Try to move box
-                if move_box_1(warehouse_map, robot_position, neighbor_coord, movement):
+                if move_box(warehouse_map, neighbor_coord, movement):
                     # If we were able to move the box, move the robot
                     new_robot_pos = (robot_position[0] + 1, robot_position[1])
                     warehouse_map[robot_position[1]][robot_position[0]] = '.'
@@ -195,9 +299,9 @@ def move_robot(warehouse_map, movements, robot_pos):
             if neighbor == '#':
                 continue
             # We ran into a box
-            if neighbor == 'O':
+            if neighbor in box_symbols:
                 # Try to move box
-                if move_box_1(warehouse_map, robot_position, neighbor_coord, movement):
+                if move_box(warehouse_map, neighbor_coord, movement):
                     # If we were able to move the box, move the robot
                     new_robot_pos = (robot_position[0], robot_position[1] - 1)
                     warehouse_map[robot_position[1]][robot_position[0]] = '.'
@@ -215,9 +319,9 @@ def move_robot(warehouse_map, movements, robot_pos):
             if neighbor == '#':
                 continue
             # We ran into a box
-            if neighbor == 'O':
+            if neighbor in box_symbols:
                 # Try to move box
-                if move_box_1(warehouse_map, robot_position, neighbor_coord, movement):
+                if move_box(warehouse_map, neighbor_coord, movement):
                     # If we were able to move the box, move the robot
                     new_robot_pos = (robot_position[0], robot_position[1] + 1)
                     warehouse_map[robot_position[1]][robot_position[0]] = '.'
@@ -230,8 +334,14 @@ def move_robot(warehouse_map, movements, robot_pos):
                 warehouse_map[new_robot_pos[1]][new_robot_pos[0]] = '@'
                 robot_position = new_robot_pos
 
+        for row in warehouse_map:
+            print("".join(row))
+
+        print(f"Iteration: {i}")
+
 def solve_part_two(input):
     warehouse_map, movements, robot_position = parse_input(input)
+    move_robot(warehouse_map, movements, robot_position)
     
     return None
 
