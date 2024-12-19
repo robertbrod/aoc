@@ -27,12 +27,12 @@
     {
         "name": "robertbrod",
         "position": 6,
-        "stars": 31
+        "stars": 32
     },
     {
         "name": "Tim Hopper",
         "position": 7,
-        "stars": 28
+        "stars": 31
     },
     {
         "name": "Alaina Arnold",
