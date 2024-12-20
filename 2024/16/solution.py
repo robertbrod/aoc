@@ -18,6 +18,13 @@ class Node:
         
     def __lt__(self, other):
         return self.f < other.f
+    
+class DijkstraNode:
+    def __init__(self, x, y, direction, distance):
+        self.x = x
+        self.y = y
+        self.direction = direction
+        self.distance = distance
 
 def parse_input(input):
     maze = []
@@ -53,6 +60,13 @@ def compute_rotation_cost(current_direction, new_direction):
     if current_direction == new_direction:
         return 0
     return 1000
+
+def dijkstra(maze, start, end):
+    expected_score = 75416
+    unvisited_nodes = set()
+    heap = []
+    node = Node(start[0], start[1], DIRECTIONS[3], 0, [(start)])
+    
     
 def astar(maze, start, end):
     open_list = []
@@ -106,4 +120,6 @@ def solve_part_one(input):
     return compute_cost(path)
 
 def solve_part_two(input):
+    start, end, maze = parse_input(input)
+    paths = dijkstra(maze, start, end)
     return None
