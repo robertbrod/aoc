@@ -2,27 +2,27 @@
     {
         "name": "Bassel T",
         "position": 1,
-        "stars": 38
+        "stars": 40
     },
     {
         "name": "Austin Owensby",
         "position": 2,
-        "stars": 38
-    },
-    {
-        "name": "Brian Mathews",
-        "position": 3,
-        "stars": 36
+        "stars": 40
     },
     {
         "name": "Travis Williamson",
+        "position": 3,
+        "stars": 38
+    },
+    {
+        "name": "Jeremy Vidaurri",
         "position": 4,
         "stars": 36
     },
     {
-        "name": "Jeremy Vidaurri",
+        "name": "Brian Mathews",
         "position": 5,
-        "stars": 35
+        "stars": 36
     },
     {
         "name": "robertbrod",
@@ -57,7 +57,7 @@
     {
         "name": "Wade Moore",
         "position": 12,
-        "stars": 14
+        "stars": 16
     },
     {
         "name": "KoryMWx20",
@@ -80,14 +80,14 @@
         "stars": 6
     },
     {
-        "name": "EthanCollins02",
-        "position": 17,
+        "name": "akrislock-capsher",
+        "position": null,
         "stars": 10
     },
     {
-        "name": "akrislock-capsher",
+        "name": "EthanCollins02",
         "position": 18,
-        "stars": 9
+        "stars": 10
     },
     {
         "name": "Joshua Chong",
