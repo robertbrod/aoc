@@ -2,12 +2,12 @@
     {
         "name": "Bassel T",
         "position": 1,
-        "stars": 38
+        "stars": 40
     },
     {
         "name": "Austin Owensby",
         "position": 2,
-        "stars": 38
+        "stars": 40
     },
     {
         "name": "Travis Williamson",
@@ -57,7 +57,7 @@
     {
         "name": "Wade Moore",
         "position": 12,
-        "stars": 14
+        "stars": 16
     },
     {
         "name": "KoryMWx20",

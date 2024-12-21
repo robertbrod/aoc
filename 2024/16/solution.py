@@ -2,9 +2,10 @@
 
 import heapq
 import util
-from collections import defaultdict, deque
+from copy import deepcopy
 
 DIRECTIONS = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+EXPECTED_SCORE = 75416
 
 class Node:
     def __init__(self, x, y, direction, g, h):
@@ -19,21 +20,20 @@ class Node:
     def __lt__(self, other):
         return self.f < other.f
     
-class DijkstraNode:
-    def __init__(self, x, y, direction, distance):
-        self.x = x
-        self.y = y
-        self.direction = direction
-        self.distance = distance
+def check_reversed_direction(new_direction, prev_direction):
+    prev_direction_index = DIRECTIONS.index(prev_direction)
+    new_direction_index = DIRECTIONS.index(new_direction)
+
+    return (prev_direction_index + 2) % 4 != new_direction_index
 
 def parse_input(input):
     maze = []
     start = None
     end = None
     
-    for x, row in enumerate(input):
+    for y, row in enumerate(input):
         maze_row = []
-        for y, col in enumerate(row):
+        for x, col in enumerate(row):
             if col == 'S':
                 start = (x, y)
                 maze_row.append('.')
@@ -102,6 +102,52 @@ def astar(maze, start, end):
             
     return None
 
+def dijkstra(maze, start, end):
+    open_list = []
+
+    heapq.heappush(open_list, (0, start, (1, 0), [start]))
+    costs = [[float('inf')] * len(row) for row in maze]
+
+    costs[start[1]][start[0]] = 0
+    
+    visited = set()
+    paths = []
+
+    while open_list:
+        cost, pos, direction, path = heapq.heappop(open_list)
+        visited.add((pos, direction))
+
+        if pos == end and cost <= costs[pos[1]][pos[0]]:
+            paths.extend(path)
+        
+        for dx, dy in DIRECTIONS:
+            nx = pos[0] + dx
+            ny = pos[1] + dy
+            n_pos = (nx, ny)
+
+            if not util.in_bounds_2d(nx, ny, len(maze[0]), len(maze)) or maze[ny][nx] == '#':
+                continue
+
+            new_cost = cost + 1
+            if (dx, dy) != direction:
+                new_cost += 1000
+
+            if costs[ny][nx] + 1000 < new_cost or new_cost > 75416:
+                continue
+
+            if (dx, dy) != direction:
+                costs[ny][nx] = min(costs[ny][nx], cost + 1001)
+                path_turn = deepcopy(path)
+                path_turn.append(n_pos)
+                heapq.heappush(open_list, (cost + 1001, n_pos, (dx, dy), path_turn))
+            elif (dx, dy) == direction:
+                costs[ny][nx] = min(costs[ny][nx], cost + 1)
+                path_straight = deepcopy(path)
+                path_straight.append(n_pos)
+                heapq.heappush(open_list, (cost + 1, n_pos, (dx, dy), path_straight))
+
+    return len(set(paths))
+
 def compute_cost(path):
     cost = 0
     
@@ -121,5 +167,11 @@ def solve_part_one(input):
 
 def solve_part_two(input):
     start, end, maze = parse_input(input)
+<<<<<<< HEAD
     paths = dijkstra(maze, start, end)
     return None
+=======
+    tile_count = dijkstra(maze, start, end)
+
+    return tile_count
+>>>>>>> baf30ea191c199e18959ba9b289e7a9bce6b78a9
