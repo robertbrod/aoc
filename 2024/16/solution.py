@@ -167,11 +167,6 @@ def solve_part_one(input):
 
 def solve_part_two(input):
     start, end, maze = parse_input(input)
-<<<<<<< HEAD
-    paths = dijkstra(maze, start, end)
-    return None
-=======
     tile_count = dijkstra(maze, start, end)
 
     return tile_count
->>>>>>> baf30ea191c199e18959ba9b289e7a9bce6b78a9

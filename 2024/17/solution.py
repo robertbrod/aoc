@@ -122,4 +122,18 @@ def solve_part_one(input):
     return output_str
 
 def solve_part_two(input):
-    return None
+    registers, program = parse_input(input)
+    candidates = [0]
+    for l in range(len(program)):
+        next_candidates = []
+        for val in candidates:
+            for i in range(8):
+                target = (val << 3) + i
+                registers['A'] = target
+                output = execute_program(registers, program)
+                output = list(map(int, output))
+                if output == program[-l-1:]:
+                    next_candidates.append(target)
+        candidates = next_candidates
+        
+    return min(candidates)
