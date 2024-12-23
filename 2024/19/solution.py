@@ -34,6 +34,18 @@ def is_pattern_possible(towels, desired_pattern, index, current_pattern):
         
     return False
 
+@functools.cache
+def get_pattern_combinations(towels, desired_pattern, index, current_pattern):
+    if index == len(desired_pattern):
+        return 1
+    
+    combinations = 0
+    potential_next_designs = get_potential_next_designs(towels, desired_pattern[index:])
+    for design in potential_next_designs:
+        combinations += get_pattern_combinations(towels, desired_pattern, index + len(design), current_pattern + design)
+        
+    return combinations
+
 def solve_part_one(input):
     towels, desired_patterns = parse_input(input)
     
@@ -45,4 +57,12 @@ def solve_part_one(input):
     return possible_designs
 
 def solve_part_two(input):
-    return None
+    towels, desired_patterns = parse_input(input)
+    
+    total_combinations = 0
+    for desired_pattern in desired_patterns:
+        result = get_pattern_combinations(towels, desired_pattern, 0, "")
+        if result:
+            total_combinations += result
+            
+    return total_combinations
