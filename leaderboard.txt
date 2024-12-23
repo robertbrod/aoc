@@ -27,7 +27,7 @@
     {
         "name": "robertbrod",
         "position": 6,
-        "stars": 35
+        "stars": 36
     },
     {
         "name": "Tim Hopper",
