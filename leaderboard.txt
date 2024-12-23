@@ -22,12 +22,12 @@
     {
         "name": "Jeremy Vidaurri",
         "position": 5,
-        "stars": 38
+        "stars": 39
     },
     {
         "name": "robertbrod",
         "position": 6,
-        "stars": 33
+        "stars": 35
     },
     {
         "name": "Tim Hopper",
@@ -37,7 +37,7 @@
     {
         "name": "Alaina Arnold",
         "position": 8,
-        "stars": 30
+        "stars": 31
     },
     {
         "name": "ealexrose",
