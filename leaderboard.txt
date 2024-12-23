@@ -2,17 +2,17 @@
     {
         "name": "Bassel T",
         "position": 1,
-        "stars": 44
+        "stars": 46
     },
     {
         "name": "Austin Owensby",
         "position": 2,
-        "stars": 44
+        "stars": 46
     },
     {
         "name": "Brian Mathews",
         "position": 3,
-        "stars": 44
+        "stars": 46
     },
     {
         "name": "Travis Williamson",
@@ -42,7 +42,7 @@
     {
         "name": "ealexrose",
         "position": 9,
-        "stars": 24
+        "stars": 25
     },
     {
         "name": "Brian Lemke",
