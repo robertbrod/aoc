@@ -17,15 +17,15 @@
     {
         "name": "Travis Williamson",
         "position": 4,
-        "stars": 44
-    },
-    {
-        "name": "Jeremy Vidaurri",
-        "position": 5,
-        "stars": 39
+        "stars": 45
     },
     {
         "name": "robertbrod",
+        "position": 5,
+        "stars": 41
+    },
+    {
+        "name": "Jeremy Vidaurri",
         "position": 6,
         "stars": 39
     },
