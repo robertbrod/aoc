@@ -37,7 +37,7 @@
     {
         "name": "Alaina Arnold",
         "position": 8,
-        "stars": 32
+        "stars": 33
     },
     {
         "name": "ealexrose",

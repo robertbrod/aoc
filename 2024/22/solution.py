@@ -61,7 +61,6 @@ def get_price_dict(price_changes):
 
         price = price_change[0]
         price_change_signal = ",".join(str(p[1]) for p in price_changes[index - 3: index + 1])
-        print(price_change_signal)
         if price_change_signal not in price_dict:
             price_dict[price_change_signal] = price
 
@@ -71,11 +70,8 @@ def solve_part_two(input):
     secret_numbers = parse_input(input)
     price_change_signals = {}
     
-    price_changes = get_price_changes(123, 10)
-    price_dict = get_price_dict(price_changes)
-    
     for secret_number in secret_numbers:
-        price_changes = get_price_changes(secret_number, 2000)
+        price_changes = get_price_changes(secret_number, 2001)
         price_dict = get_price_dict(price_changes)
 
         for key in price_dict:
