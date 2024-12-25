@@ -27,17 +27,17 @@
     {
         "name": "Jeremy Vidaurri",
         "position": 6,
-        "stars": 39
+        "stars": 40
     },
     {
         "name": "Tim Hopper",
         "position": 7,
-        "stars": 39
+        "stars": 41
     },
     {
         "name": "Alaina Arnold",
         "position": 8,
-        "stars": 31
+        "stars": 32
     },
     {
         "name": "ealexrose",
@@ -57,7 +57,7 @@
     {
         "name": "Wade Moore",
         "position": 12,
-        "stars": 18
+        "stars": 20
     },
     {
         "name": "KoryMWx20",
