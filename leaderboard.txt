@@ -22,12 +22,12 @@
     {
         "name": "Jeremy Vidaurri",
         "position": 5,
-        "stars": 43
+        "stars": 44
     },
     {
         "name": "robertbrod",
         "position": 6,
-        "stars": 45
+        "stars": 46
     },
     {
         "name": "Tim Hopper",
