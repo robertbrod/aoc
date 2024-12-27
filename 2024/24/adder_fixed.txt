@@ -1,0 +1,401 @@
+# Adder (bit 0)
+AND - y00 - x00 - qkm  
+XOR - y00 - x00 - z00
+
+# Adder (bit 1)
+AND - x01 - y01 - svq  
+XOR - x01 - y01 - rvb  
+
+AND - rvb - qkm - ksr
+XOR - rvb - qkm - z01
+
+OR - ksr - svq - qfj
+
+# Adder (bit 2)
+AND - y02 - x02 - nps  
+XOR - x02 - y02 - hvf  
+
+AND - qfj - hvf - kbb
+XOR - hvf - qfj - z02
+
+OR - nps - kbb - kgk
+
+# Adder (bit 3)
+AND - y03 - x03 - gmf  
+XOR - x03 - y03 - rgm 
+
+AND - kgk - rgm - dkr
+XOR - kgk - rgm - z03
+
+OR - gmf - dkr - qdg
+
+# Adder (bit 4)
+AND - x04 - y04 - cjq  
+XOR - x04 - y04 - ggs  
+
+AND - ggs - qdg - qqg
+XOR - ggs - qdg - z04
+
+OR - cjq - qqg - chv
+
+# Adder (bit 5)
+AND - x05 - y05 - hqr  
+XOR - y05 - x05 - rpn  
+
+AND - rpn - chv - hqv
+XOR - chv - rpn - z05
+
+OR - hqr - hqv - pjh
+
+# Adder (bit 6)
+AND - y06 - x06 - std  
+XOR - x06 - y06 - rbr  
+
+AND - pjh - rbr - ckw
+XOR - rbr - pjh - z06
+
+OR - ckw - std - qpc
+
+# Adder (bit 7)
+AND - y07 - x07 - pkw  
+XOR - y07 - x07 - svk  
+
+AND - svk - qpc - nvr
+XOR - qpc - svk - z07
+
+OR - nvr - pkw - vdg
+
+# Adder (bit 8)
+AND - x08 - y08 - wgh  
+XOR - y08 - x08 - dhv  
+
+AND - dhv - vdg - ngt
+XOR - vdg - dhv - z08
+
+OR - wgh - ngt - bnw
+
+# Adder (bit 9)
+AND - y09 - x09 - dmb 
+XOR - x09 - y09 - qqr 
+
+AND - qqr - bnw - hnw
+XOR - bnw - qqr - z09
+
+OR - dmb - hnw - msp
+
+# Adder (bit 10)
+AND - x10 - y10 - rwq 
+XOR - x10 - y10 - wgr 
+
+AND - wgr - msp - nkv
+XOR - msp - wgr - z10
+
+OR - nkv - rwq - qvd
+
+# Adder (bit 11)
+AND - x11 - y11 - qps 
+XOR - y11 - x11 - psh 
+
+AND - psh - qvd - kbk
+XOR - qvd - psh - z11
+
+OR - kbk - qps - jhf
+
+# Adder (bit 12)
+AND - x12 - y12 - vwc 
+XOR - x12 - y12 - ctc 
+
+AND - jhf - ctc - hks
+XOR - ctc - jhf - z12
+
+OR - hks - vwc - wpw
+
+# Adder (bit 13)
+AND - y13 - x13 - wfg 
+XOR - x13 - y13 - tgv 
+
+AND - wpw - tgv - qnb
+XOR - wpw - tgv - z13
+
+OR - qnb - wfg - ftc
+
+# Adder (bit 14)
+AND - x14 - y14 - gnc 
+XOR - x14 - y14 - gdr 
+
+AND - gdr - ftc - dqg
+XOR - gdr - ftc - z14
+
+OR - dqg - gnc - ctg
+
+# Adder (bit 15)
+AND - y15 - x15 - mrm 
+XOR - x15 - y15 - rjm 
+
+AND - rjm - ctg - dnn
+XOR - ctg - rjm - z15 *SWAP 1*
+
+OR - dnn - mrm - qnw *SWAP 1*
+
+# Adder (bit 16)
+AND - x16 - y16 - mmn 
+XOR - y16 - x16 - kdf 
+
+AND - kdf - qnw - srr
+XOR - kdf - qnw - z16
+
+OR - srr - mmn - bmk
+
+# Adder (bit 17)
+AND - x17 - y17 - wtp 
+XOR - y17 - x17 - qjb 
+
+AND - bmk - qjb - swr
+XOR - qjb - bmk - z17
+
+OR - swr - wtp - cgq
+
+# Adder (bit 18)
+AND - x18 - y18 - nbt 
+XOR - x18 - y18 - mvk 
+
+AND - cgq - mvk - vrq
+XOR - cgq - mvk - z18
+
+OR - nbt - vrq - wwc
+
+# Adder (bit 19)
+AND - y19 - x19 - vct 
+XOR - x19 - y19 - qpk
+
+AND - wwc - qpk - mjm
+XOR - wwc - qpk - z19
+
+OR - mjm - vct - wrb
+
+# Adder (bit 20)
+AND - x20 - y20 - cqr *SWAP 2*
+XOR - x20 - y20 - msn 
+
+AND - wrb - msn - fkg
+XOR - wrb - msn - z20 *SWAP 2*
+
+OR - fkg - cqr - hbp
+
+# Adder (bit 21)
+AND - y21 - x21 - bfk 
+XOR - y21 - x21 - rjq 
+
+AND - hbp - rjq - fdb
+XOR - hbp - rjq - z21
+
+OR - fdb - bfk - pcp
+
+# Adder (bit 22)
+AND - x22 - y22 - sgc 
+XOR - y22 - x22 - nns 
+
+AND - nns - pcp - tsp
+XOR - pcp - nns - z22
+
+OR - tsp - sgc - tpr
+
+# Adder (bit 23)
+AND - y23 - x23 - qbm 
+XOR - x23 - y23 - kpc 
+
+AND - kpc - tpr - rvc
+XOR - tpr - kpc - z23
+
+OR - rvc - qbm - htw
+
+# Adder (bit 24)
+AND - x24 - y24 - cmf 
+XOR - y24 - x24 - ptv 
+
+AND - ptv - htw - fgn
+XOR - ptv - htw - z24
+
+OR - fgn - cmf - tcw
+
+# Adder (bit 25)
+AND - x25 - y25 - fhr 
+XOR - x25 - y25 - qbj 
+
+AND - tcw - qbj - cnd
+XOR - qbj - tcw - z25
+
+OR - cnd - fhr - pfw
+
+# Adder (bit 26)
+AND - y26 - x26 - nsh 
+XOR - x26 - y26 - hdm 
+
+AND - hdm - pfw - mmj
+XOR - pfw - hdm - z26
+
+OR - mmj - nsh - trt
+
+# Adder (bit 27)
+AND - y27 - x27 - ncd *SWAP 3*
+XOR - x27 - y27 - nfj *SWAP 3*
+
+AND - nfj - trt - hrn
+XOR - trt - nfj - z27
+
+OR - ncd - hrn - ndd
+
+# Adder (bit 28)
+AND - y28 - x28 - wvn 
+XOR - y28 - x28 - brm 
+
+AND - ndd - brm - kmn
+XOR - ndd - brm - z28
+
+OR - kmn - wvn - mdv
+
+# Adder (bit 29)
+AND - x29 - y29 - gsb 
+XOR - x29 - y29 - qrs 
+
+AND - mdv - qrs - mnm
+XOR - qrs - mdv - z29
+
+OR - mnm - gsb - hgk
+
+# Adder (bit 30)
+AND - x30 - y30 - bsd 
+XOR - x30 - y30 - vks 
+
+AND - hgk - vks - jpg
+XOR - hgk - vks - z30
+
+OR - jpg - bsd - wmd
+
+# Adder (bit 31)
+AND - x31 - y31 - hrb 
+XOR - y31 - x31 - kpj 
+
+AND - wmd - kpj - rrf
+XOR - wmd - kpj - z31
+
+OR - hrb - rrf - gqw
+
+# Adder (bit 32)
+AND - x32 - y32 - qhn 
+XOR - x32 - y32 - dbv 
+
+AND - dbv - gqw - npv
+XOR - gqw - dbv - z32
+
+OR - npv - qhn - mbt
+
+# Adder (bit 33)
+AND - x33 - y33 - jgt 
+XOR - y33 - x33 - dhp 
+
+AND - dhp - mbt - wfq
+XOR - mbt - dhp - z33
+
+OR - jgt - wfq - ndj
+
+# Adder (bit 34)
+AND - y34 - x34 - bbq 
+XOR - x34 - y34 - mng 
+
+AND - mng - ndj - bjg
+XOR - mng - ndj - z34
+
+OR - bjg - bbq - tmw
+
+# Adder (bit 35)
+AND - y35 - x35 - dmv 
+XOR - y35 - x35 - hvb 
+
+AND - tmw - hvb - fgq
+XOR - hvb - tmw - z35
+
+OR - dmv - fgq - twd
+
+# Adder (bit 36)
+AND - x36 - y36 - crj 
+XOR - x36 - y36 - sjw 
+
+AND - twd - sjw - dvm
+XOR - twd - sjw - z36
+
+OR - crj - dvm - fcm
+
+# Adder (bit 37)
+AND - y37 - x37 - jbg 
+XOR - y37 - x37 - dnt 
+
+AND - dnt - fcm - vkg *SWAP 4*
+XOR - fcm - dnt - z37 *SWAP 4*
+
+OR - vkg - jbg - bvv
+
+# Adder (bit 38)
+AND - x38 - y38 - qwb 
+XOR - x38 - y38 - hbt 
+
+AND - bvv - hbt - pgg
+XOR - hbt - bvv - z38
+
+OR - qwb - pgg - gfb
+
+# Adder (bit 39)
+AND - y39 - x39 - fbk 
+XOR - x39 - y39 - jrr 
+
+AND - gfb - jrr - bps
+XOR - gfb - jrr - z39
+
+OR - bps - fbk - gpw
+
+# Adder (bit 40)
+AND - y40 - x40 - dwr 
+XOR - y40 - x40 - htn 
+
+AND - gpw - htn - ngw
+XOR - gpw - htn - z40
+
+OR - dwr - ngw - ctj
+
+# Adder (bit 41)
+AND - x41 - y41 - kfb 
+XOR - y41 - x41 - dgv 
+
+AND - ctj - dgv - kgn
+XOR - ctj - dgv - z41
+
+OR - kgn - kfb - vkh
+
+# Adder (bit 42)
+AND - x42 - y42 - qfb 
+XOR - x42 - y42 - vdp
+
+AND - vdp - vkh - qdq
+XOR - vdp - vkh - z42
+
+OR - qdq - qfb - tfg
+
+# Adder (bit 43)
+AND - y43 - x43 - mqp 
+XOR - x43 - y43 - qkc 
+
+AND - tfg - qkc - vgf
+XOR - tfg - qkc - z43
+
+OR - vgf - mqp - mqb
+
+# Adder (bit 44)
+AND - x44 - y44 - rvs 
+XOR - x44 - y44 - spg 
+
+AND - mqb - spg - bfj
+XOR - mqb - spg - z44
+
+OR - bfj - rvs - z45
+
+cqr,ncd,nfj,qnw,vkg,z15,z20,z37

@@ -1,5 +1,7 @@
 # Advent of Code 2024 - Day 24
 
+import json
+
 def parse_input(input):
     wires = {}
     gates = []
@@ -60,6 +62,7 @@ def get_output(wires, gates):
                 output = operation_map[operation](input_one, input_two)
                 if 'z' in output_wire:
                     outputs.append((output_wire, output))
+                    wires[output_wire] = output
                 else:
                     wires[output_wire] = output
             else:
@@ -87,4 +90,13 @@ def solve_part_one(input):
     return decimal_output
 
 def solve_part_two(input):
+    wires, gates = parse_input(input)
+    # Done by hand
+    
+    with open(f"2024/24/wires_and_gates.txt", "w") as file:
+        json.dump(wires, file, indent = 4)
+        file.write("\n")
+        for gate in gates:
+            file.write(f"{gate[0]} - {gate[1]} - {gate[2]} - {gate[3]}\n")
+    
     return None
