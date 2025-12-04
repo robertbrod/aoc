@@ -81,12 +81,6 @@ def count_neighbor_rolls(room_map, coords):
 
     return neighbors
 
-def fetch_input():
-    with open(f"2025_4_input.txt", "r") as file:
-        lines = file.readlines()
-        return [line.strip() for line in lines]
-
-
 def solve_part_one(input):
     room_map, paper_rolls = parse_input(input)
     total_movable_paper_rolls = 0
@@ -134,6 +128,3 @@ def solve_part_two(input):
         total_movable_paper_rolls += removed_paper_rolls
 
     return total_movable_paper_rolls
-
-# print(solve_part_one(fetch_input()))
-print(solve_part_two(fetch_input()))

@@ -109,7 +109,7 @@ def fetch_leaderboard() -> list[Participant]:
     
     print(f"Refreshing private leaderboard stats...")
     
-    response = requests.get(config_manager.get_config("private_leaderboard_url"), headers = _fetch_headers())
+    response = requests.get(config_manager.get_config("private_leaderboard_url"), cookies = _fetch_cookie(), headers = _fetch_headers())
     
     config_manager.update_last_leaderboard_api_call_time()
     
@@ -183,8 +183,12 @@ def _minutes_since_last_leaderboard_call():
 
 def _fetch_headers():
     return {
-        "User-Agent": config_manager.get_config("user_data")["user_agent"],
-        "Cookie": os.getenv("AOC_COOKIE")
+        "User-Agent": config_manager.get_config("user_data")["user_agent"]
+    }
+
+def _fetch_cookie():
+    return {
+        "session": os.getenv("AOC_COOKIE")
     }
     
 def _parse_answer_response(response):
