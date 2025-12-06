@@ -2,125 +2,120 @@
     {
         "name": "Bassel T",
         "position": 1,
-        "stars": 50
+        "stars": 2
     },
     {
         "name": "Austin Owensby",
         "position": 2,
-        "stars": 50
+        "stars": 2
     },
     {
-        "name": "Brian Mathews",
+        "name": "(anonymous user #5303474)",
         "position": 3,
-        "stars": 50
+        "stars": 2
     },
     {
-        "name": "Travis Williamson",
+        "name": "Brian Lemke",
         "position": 4,
-        "stars": 50
+        "stars": 2
     },
     {
-        "name": "robertbrod",
+        "name": "emmelineblevins",
         "position": 5,
-        "stars": 48
+        "stars": 2
     },
     {
         "name": "Jeremy Vidaurri",
         "position": 6,
-        "stars": 44
-    },
-    {
-        "name": "Tim Hopper",
-        "position": 7,
-        "stars": 41
-    },
-    {
-        "name": "Alaina Arnold",
-        "position": 8,
-        "stars": 42
-    },
-    {
-        "name": "ealexrose",
-        "position": 9,
-        "stars": 25
-    },
-    {
-        "name": "Brian Lemke",
-        "position": 10,
-        "stars": 29
-    },
-    {
-        "name": "Joshua Johnston",
-        "position": 11,
-        "stars": 21
-    },
-    {
-        "name": "Wade Moore",
-        "position": 12,
-        "stars": 22
-    },
-    {
-        "name": "KoryMWx20",
-        "position": 13,
-        "stars": 11
-    },
-    {
-        "name": "ZKraimer96",
-        "position": 14,
-        "stars": 11
-    },
-    {
-        "name": "akrislock-capsher",
-        "position": 15,
-        "stars": 12
-    },
-    {
-        "name": "Grant Bridges",
-        "position": 16,
-        "stars": 8
-    },
-    {
-        "name": "JD Farst",
-        "position": 17,
-        "stars": 6
-    },
-    {
-        "name": "EthanCollins02",
-        "position": 18,
-        "stars": 10
-    },
-    {
-        "name": "Joshua Chong",
-        "position": 19,
-        "stars": 4
-    },
-    {
-        "name": "elijahdecker",
-        "position": 20,
-        "stars": 4
-    },
-    {
-        "name": "BigOlYeet",
-        "position": 21,
-        "stars": 3
-    },
-    {
-        "name": "Fletch-SC",
-        "position": 22,
-        "stars": 4
-    },
-    {
-        "name": "emmelineblevins",
-        "position": 23,
         "stars": 2
     },
     {
+        "name": "Wade Moore",
+        "position": 7,
+        "stars": 3
+    },
+    {
+        "name": "robertbrod",
+        "position": 8,
+        "stars": 3
+    },
+    {
+        "name": "Alaina Arnold",
+        "position": 9,
+        "stars": 3
+    },
+    {
+        "name": "Travis Williamson",
+        "position": 10,
+        "stars": 2
+    },
+    {
+        "name": "Brian Mathews",
+        "position": 11,
+        "stars": 2
+    },
+    {
+        "name": "timidGambler",
+        "position": 12,
+        "stars": 3
+    },
+    {
+        "name": "srychlik",
+        "position": 13,
+        "stars": 1
+    },
+    {
         "name": "joshuabjohnston",
+        "position": 14,
+        "stars": 1
+    },
+    {
+        "name": "Tim Hopper",
         "position": null,
         "stars": 0
     },
     {
-        "name": "Colten Ginnis",
+        "name": "elijahdecker",
+        "position": null,
+        "stars": 0
+    },
+    {
+        "name": "Grant Bridges",
+        "position": null,
+        "stars": 0
+    },
+    {
+        "name": "ZKraimer96",
+        "position": null,
+        "stars": 0
+    },
+    {
+        "name": "EthanCollins02",
+        "position": null,
+        "stars": 0
+    },
+    {
+        "name": "KoryMWx20",
+        "position": null,
+        "stars": 0
+    },
+    {
+        "name": "JD Farst",
+        "position": null,
+        "stars": 0
+    },
+    {
+        "name": "BigOlYeet",
+        "position": null,
+        "stars": 0
+    },
+    {
+        "name": "Fletch-SC",
+        "position": null,
+        "stars": 0
+    },
+    {
+        "name": "krabe3ag",
         "position": null,
         "stars": 0
     }
