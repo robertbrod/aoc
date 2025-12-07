@@ -7,57 +7,57 @@
     {
         "name": "Austin Owensby",
         "position": 2,
-        "stars": 2
+        "stars": 3
     },
     {
-        "name": "(anonymous user #5303474)",
+        "name": "emmelineblevins",
         "position": 3,
         "stars": 2
     },
     {
-        "name": "Brian Lemke",
+        "name": "robertbrod",
         "position": 4,
-        "stars": 2
+        "stars": 3
     },
     {
-        "name": "emmelineblevins",
+        "name": "(anonymous user #5303474)",
         "position": 5,
         "stars": 2
     },
     {
-        "name": "Jeremy Vidaurri",
+        "name": "Alaina Arnold",
         "position": 6,
         "stars": 2
     },
     {
-        "name": "Wade Moore",
+        "name": "Brian Mathews",
         "position": 7,
-        "stars": 3
+        "stars": 2
     },
     {
-        "name": "robertbrod",
+        "name": "Brian Lemke",
         "position": 8,
-        "stars": 3
+        "stars": 2
     },
     {
-        "name": "Alaina Arnold",
+        "name": "Jeremy Vidaurri",
         "position": 9,
+        "stars": 2
+    },
+    {
+        "name": "Wade Moore",
+        "position": 10,
         "stars": 3
     },
     {
         "name": "Travis Williamson",
-        "position": 10,
-        "stars": 2
-    },
-    {
-        "name": "Brian Mathews",
         "position": 11,
         "stars": 2
     },
     {
         "name": "timidGambler",
         "position": 12,
-        "stars": 3
+        "stars": 2
     },
     {
         "name": "srychlik",
