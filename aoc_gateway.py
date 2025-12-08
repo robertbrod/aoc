@@ -187,11 +187,10 @@ def _fetch_headers():
     }
 
 def _fetch_cookie():
-    test = os.getenv("AOC_COOKIE")
     return {
         "session": os.getenv("AOC_COOKIE")
     }
-    
+
 def _parse_answer_response(response):
     soup = BeautifulSoup(response, 'html.parser')
     
