@@ -37,11 +37,11 @@ def parse_input(input, use_sample_input = False):
     if use_sample_input:
         for line in sample_input:
             x, y, z = line.strip().split(',')
-            junction_boxes.append(JunctionBox(x, y, z))
+            junction_boxes.append(JunctionBox(int(x), int(y), int(z)))
     else:
         for line in input:
             x, y, z = line.strip().split(',')
-            junction_boxes.append(JunctionBox(x, y, z))
+            junction_boxes.append(JunctionBox(int(x), int(y), int(z)))
 
     return junction_boxes
 
@@ -49,16 +49,7 @@ def calc_distance(p, q):
     return math.sqrt(((p.x - q.x) ** 2) + ((p.y - q.y) ** 2) + ((p.z - q.z) ** 2))
 
 def solve_part_one(input):
-    junction_boxes = parse_input(input)
-
-    for junction_box in junction_boxes:
-        pass
+    junction_boxes = parse_input(input, True)
 
 def solve_part_two(input):
     return None
-
-def fetch_input():
-    with open(f"2025_8_input.txt", "r") as file:
-        return file.readlines()
-    
-solve_part_one(fetch_input())
