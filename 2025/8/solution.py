@@ -1,4 +1,3 @@
-
 # Advent of Code 2025 - Day 8
 
 import math
@@ -31,7 +30,7 @@ class Circuit:
     def __str__(self):
         a = ""
         for box in self.junction_boxes:
-            a += box.__str__()
+            a += box.__str__() + "  ->  "
 
         return a
     
@@ -89,19 +88,13 @@ def fetch_input():
         return file.readlines()
     
 def merge_circuits(a, b):
-    if len(a.junction_boxes) >= len(b.junction_boxes):
         for element in b.junction_boxes:
             if element not in a.junction_boxes:
                 a.junction_boxes.append(element)
         b.junction_boxes.clear()
-    else:
-        for element in a.junction_boxes:
-            if element not in b.junction_boxes:
-                b.junction_boxes.append(element)
-        a.junction_boxes.clear()
 
-def solve_part_one(input):    
-    junction_boxes = parse_input(input, True)
+def solve_part_one(input, print_verbose, numcons):    
+    junction_boxes = parse_input(input, False)
     connections = []
 
     for i in range(0, len(junction_boxes)):
@@ -113,64 +106,87 @@ def solve_part_one(input):
     connections.sort(key = lambda connection: connection.distance)
 
     circuits = []
+
+    if (print_verbose):
     
-    for connection in connections:
-        circuit_handled = False
-        for left_circuit in circuits:
-            if circuit_handled:
-                break
-
-            if connection.a in left_circuit.junction_boxes:
-                print(f"Box {connection.a} appeared in circuit {left_circuit}")
-                left_circuit.junction_boxes.append(connection.b)
-                
-                for right_circuit in circuits:
-                    if connection.b in right_circuit.junction_boxes and left_circuit != right_circuit:
-                        print(f"")
-                        merge_circuits(left_circuit, right_circuit)
-                        if (len(left_circuit.junction_boxes) <= len(right_circuit.junction_boxes)):
-                            circuits.remove(left_circuit)
-                        else:
-                            circuits.remove(right_circuit)
-
-                        circuit_handled = True
-                        break
-            elif connection.b in left_circuit.junction_boxes and left_circuit != right_circuit:
-                left_circuit.junction_boxes.append(connection.a)
-                for right_circuit in circuits:
-                    if connection.a in right_circuit.junction_boxes:
-                        merge_circuits(left_circuit, right_circuit)
-                        if (len(left_circuit.junction_boxes) <= len(right_circuit.junction_boxes)):
-                            circuits.remove(left_circuit)
-                        else:
-                            circuits.remove(right_circuit)
-
-                        circuit_handled = True
-                        break
+        for cn, connection in enumerate(connections[:numcons]):
+            print(f"(CN{cn+1}) Now considering connection #{cn+1}, {connection}")
+            circuit_handled = False
+            for i, left_circuit in enumerate(circuits):
+                if connection.a in left_circuit.junction_boxes and connection.b not in left_circuit.junction_boxes:
+                    circuit_handled = True
+                    left_circuit.junction_boxes.append(connection.b)
+                    print(f"Circuit {i+1} is now of size {len(left_circuit.junction_boxes)}. Common point was {connection.a}, added point was {connection.b}. Checking for merges.")
+                    for j, right_circuit in enumerate(circuits):
+                        if connection.b in right_circuit.junction_boxes and left_circuit != right_circuit:
+                            print(f"Attempting to merge circuits {i+1} and {j+1} because {connection.b} is in circuit {j+1}")
+                            merge_circuits(left_circuit, right_circuit)
+                            break
+                elif connection.b in left_circuit.junction_boxes and connection.b not in left_circuit.junction_boxes:
+                    circuit_handled = True
+                    left_circuit.junction_boxes.append(connection.a)
+                    print(f"Circuit {i+1} is now of size {len(left_circuit.junction_boxes)}. Checking for merges.")
+                    for j, right_circuit in enumerate(circuits):
+                        if connection.a in right_circuit.junction_boxes and left_circuit != right_circuit:
+                            print(f"Attempting to merge circuits {i+1} and {j+1}")
+                            merge_circuits(left_circuit, right_circuit)
+                            break
+            
+            if not circuit_handled:
+                new_circuit = Circuit()
+                new_circuit.junction_boxes.append(connection.a)
+                new_circuit.junction_boxes.append(connection.b)
+                circuits.append(new_circuit)
+                print(f"New circuit created, circuit #{len(circuits)}! {new_circuit}")
+            print(f"(/CN{cn+1}) Finished considering connection #{cn+1}, {connection}. \n Total number of circuits is now {len(circuits)}. \n\n")
+            
+        for i, circuit in enumerate(circuits):
+            if (len(circuit.junction_boxes) != 0):
+                print(f"Circuit {i+1} ({len(circuit.junction_boxes)} connections): {circuit}\n")
+        circuits.sort(key = lambda circuit: len(circuit.junction_boxes), reverse=True)
         
-        if not circuit_handled:
-            new_circuit = Circuit()
-            new_circuit.junction_boxes.append(connection.a)
-            new_circuit.junction_boxes.append(connection.b)
-            circuits.append(new_circuit)
-            print(f"New circuit created! {new_circuit}")
-    
-    circuits.sort(key = lambda circuit: len(circuit.junction_boxes))
+        solution = 1
+        for i in range(0, 3):
+            solution *= len(circuits[i].junction_boxes)
 
-    print(f"printin circuits")
-    for circuit in circuits:
-        print(circuit)
-    
-    solution = 1
-    for i in range(0, 3):
-        solution *= len(circuits[i].junction_boxes)
+        print(solution)
 
-    for circuit in circuits:
-        print(circuit)
+    else:
 
-    print(solution)
+        for cn, connection in enumerate(connections[:numcons]):
+            circuit_handled = False
+            for i, left_circuit in enumerate(circuits):
+                if connection.a in left_circuit.junction_boxes and connection.b not in left_circuit.junction_boxes:
+                    circuit_handled = True
+                    left_circuit.junction_boxes.append(connection.b)
+                    for j, right_circuit in enumerate(circuits):
+                        if connection.b in right_circuit.junction_boxes and left_circuit != right_circuit:
+                            merge_circuits(left_circuit, right_circuit)
+                            break
+                elif connection.b in left_circuit.junction_boxes and connection.b not in left_circuit.junction_boxes:
+                    circuit_handled = True
+                    left_circuit.junction_boxes.append(connection.a)
+                    for j, right_circuit in enumerate(circuits):
+                        if connection.a in right_circuit.junction_boxes and left_circuit != right_circuit:
+                            merge_circuits(left_circuit, right_circuit)
+                            break
+            
+            if not circuit_handled:
+                new_circuit = Circuit()
+                new_circuit.junction_boxes.append(connection.a)
+                new_circuit.junction_boxes.append(connection.b)
+                circuits.append(new_circuit)
+
+        circuits.sort(key = lambda circuit: len(circuit.junction_boxes), reverse=True)
+        
+        solution = 1
+        for i in range(0, 3):
+            print(f"Circuit {i+1} ({len(circuits[i].junction_boxes)} connections): {circuits[i]}\n")
+            solution *= len(circuits[i].junction_boxes)
+
+        print(solution)
 
 def solve_part_two(input):
     return None
 
-solve_part_one(fetch_input())
+solve_part_one(fetch_input(), False, 1000)
