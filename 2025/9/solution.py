@@ -1,6 +1,9 @@
 
 # Advent of Code 2025 - Day 9
 
+from shapely import Point
+from shapely import Polygon
+
 def solve_part_one(input):
     points = parse_input(input)
     max_area = 0
@@ -19,74 +22,55 @@ def solve_part_one(input):
 
 def solve_part_two(input):
     points = parse_input(input)
+    polygon = Polygon(points)
     max_area = 0
 
     for i in range(0, len(points)):
-        ax = points[i][0]
-        ay = points[i][1]
         for j in range(0, len(points)):
-            bx = points[j][0]
-            by = points[j][1]
+            corner1 = points[i]
+            corner1_x = corner1.x
+            corner1_y = corner1.y
 
-            # if ax == bx and ay == by and i != j:
-            #     print("Duplicate point found in list")
+            corner2 = points[j]
+            corner2_x = corner2.x
+            corner2_y = corner2.y
 
-            dx = ax - bx
-            dy = ay - by
+            w = abs(corner1_x - corner2_x) + 1
+            h = abs(corner1_y - corner2_y) + 1
 
-            dx += 1
-            dy += 1
-            
-            valid_point = True
+            minx = min(corner1_x, corner2_x)
+            maxx = max(corner1_x, corner2_x)
+            miny = min(corner1_y, corner2_y)
+            maxy = max(corner1_y, corner2_y)
 
-            if abs(dx * dy) > max_area:
-                for point in range(0, len(points)):
-                    px = points[point][0]
-                    py = points[point][1]
+            rect = Polygon.from_bounds(minx, miny, maxx, maxy)
 
-                    if (px == ax and py == ay) or (px == bx and py == by):
-                        # print(f"skipping point ({px}, {py}).... a = ({ax}, {ay}); b = ({bx}, {by})")
-                        continue
-                    else:
-                        if (px < ax and px > bx) or (px > ax and px < bx):
-                            if (py < ay and py > by) or (py > ay and py < by):
-                                # print(f"{px} is between {ax} and {bx}")
-                                # print(f"{py} is between {ay} and {by}")
-                                valid_point = False
-                                break
+            if polygon.contains(rect):
+                max_area = max(max_area, w * h)
 
-                top_boundary_count = 1
-                bottom_boundary_count = 1
-                left_boundary_count = 1
-                right_boundary_count = 1
+    print(int(max_area))
 
-                for point in range(0, len(points)):
-                    px = points[point][0]
-                    py = points[point][1]
+def parse_input(input, use_sample_input=False):
+    sample_input = []
+    sample_input.append("7,1")
+    sample_input.append("11,1")
+    sample_input.append("11,7")
+    sample_input.append("9,7")
+    sample_input.append("9,5")
+    sample_input.append("2,5")
+    sample_input.append("2,3")
+    sample_input.append("7,3")
 
-                    if py == ay and ((px < ax and px > bx) or (px > ax and px < bx)):
-                        top_boundary_count += 1
-                    if py == by and ((px < ax and px > bx) or (px > ax and px < bx)):
-                        bottom_boundary_count += 1
-                    if px == ax and ((py < ay and py > by) or (py > ay and py < by)):
-                        left_boundary_count += 1
-                    if px == bx and ((py < ay and py > by) or (py > ay and py < by)):
-                        right_boundary_count += 1
-
-                if top_boundary_count < 2 or bottom_boundary_count < 2 or left_boundary_count < 2 or right_boundary_count < 2:
-                    valid_point = False
-
-                if valid_point:
-                    max_area = abs(dx * dy)
-
-    print(max_area)
-
-def parse_input(input):
     points = []
 
-    for line in input:
-        x, y = line.strip().split(',')
-        points.append((int(x), int(y)))
+    if use_sample_input:
+        for line in sample_input:
+            x, y = line.strip().split(',')
+            points.append(Point(int(x), int(y)))
+    else:
+        for line in input:
+            x, y = line.strip().split(',')
+            points.append(Point(int(x), int(y)))
 
     return points
 
