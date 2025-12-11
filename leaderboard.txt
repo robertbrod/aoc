@@ -5,44 +5,44 @@
         "stars": 3
     },
     {
-        "name": "emmelineblevins",
+        "name": "Austin Owensby",
         "position": 2,
         "stars": 3
     },
     {
-        "name": "Austin Owensby",
+        "name": "the-real-rusty-shackleford",
         "position": 3,
-        "stars": 2
+        "stars": 3
     },
     {
-        "name": "Brian Lemke",
+        "name": "emmelineblevins",
         "position": 4,
         "stars": 2
     },
     {
-        "name": "Brian Mathews",
+        "name": "robertbrod",
         "position": 5,
         "stars": 2
     },
     {
-        "name": "robertbrod",
+        "name": "Brian Lemke",
         "position": 6,
-        "stars": 2
+        "stars": 3
     },
     {
-        "name": "the-real-rusty-shackleford",
+        "name": "Travis Williamson",
         "position": 7,
-        "stars": 2
+        "stars": 3
     },
     {
-        "name": "Alaina Arnold",
+        "name": "Brian Mathews",
         "position": 8,
         "stars": 2
     },
     {
-        "name": "Travis Williamson",
+        "name": "Alaina Arnold",
         "position": 9,
-        "stars": 2
+        "stars": 3
     },
     {
         "name": "Jeremy Vidaurri",
@@ -52,15 +52,15 @@
     {
         "name": "Wade Moore",
         "position": 11,
-        "stars": 2
+        "stars": 3
     },
     {
-        "name": "timidGambler",
+        "name": "krabe3ag",
         "position": 12,
         "stars": 2
     },
     {
-        "name": "krabe3ag",
+        "name": "timidGambler",
         "position": 13,
         "stars": 2
     },
@@ -75,12 +75,17 @@
         "stars": 1
     },
     {
-        "name": "Tim Hopper",
-        "position": null,
-        "stars": 0
+        "name": "KoryMWx20",
+        "position": 16,
+        "stars": 3
     },
     {
         "name": "elijahdecker",
+        "position": 17,
+        "stars": 1
+    },
+    {
+        "name": "Tim Hopper",
         "position": null,
         "stars": 0
     },
@@ -96,11 +101,6 @@
     },
     {
         "name": "EthanCollins02",
-        "position": null,
-        "stars": 0
-    },
-    {
-        "name": "KoryMWx20",
         "position": null,
         "stars": 0
     },
