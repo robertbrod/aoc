@@ -106,41 +106,43 @@ def solve_part_one(input):
         button_masks = manual.button_masks
         min_button_presses = float('inf')      
         
-        permutations = itertools.permutations(button_masks)
-        
-        for p_index, permutation in enumerate(permutations):
-            print(f"Processing permutation {p_index}...")
-            visited = set()
-            light_state = 0
-            visited.add(light_state)
-            button_presses = None
-            for mask in permutation:
-                light_state ^= mask
-                if light_state == target_light_state:
-                    if not button_presses:
-                        button_presses = 1
-                    else:
-                        button_presses += 1
-                    if button_presses != None and button_presses < min_button_presses:
-                        min_button_presses = button_presses
-                        
-                    break
-                elif light_state in visited:
-                    break
-                else:
-                    visited.add(light_state)
-                    if not button_presses:
-                        button_presses = 1
-                    else:
-                        button_presses += 1
-                    
-                    if button_presses > min_button_presses:
+        for k in range(0, len(button_masks)):
+            combinations = itertools.combinations(button_masks, k)
+            for combination in combinations:
+                visited = set()
+                light_state = 0
+                visited.add(light_state)
+                button_presses = None
+                for mask in combination:
+                    light_state ^= mask
+                    if light_state == target_light_state:
+                        if not button_presses:
+                            button_presses = 1
+                        else:
+                            button_presses += 1
+                        if button_presses != None and button_presses < min_button_presses:
+                            min_button_presses = button_presses
+                            
                         break
+                    elif light_state in visited:
+                        break
+                    else:
+                        visited.add(light_state)
+                        if not button_presses:
+                            button_presses = 1
+                        else:
+                            button_presses += 1
+                        
+                        if button_presses > min_button_presses:
+                            break
             
         total_button_presses += min_button_presses
         print(f"Added {min_button_presses} button presses to our total. New total is {total_button_presses}...")
 
+    print(total_button_presses)
     return total_button_presses
 
 def solve_part_two(input):
     return None
+
+solve_part_one(fetch_input())
